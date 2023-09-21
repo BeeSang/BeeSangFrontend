@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BeeSangTheme {
                 // A surface container using the 'background' color from the theme
-                // initial commit
+                // initial commit2
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
