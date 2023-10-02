@@ -2,7 +2,6 @@ package com.example.beesang
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.beesang.activitys.LoginActivity
-import com.example.beesang.login.Login
+import com.example.beesang.composes.welcome.WelcomeCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
 import com.example.beesang.welcome.Welcome
@@ -28,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Welcome(onButtonTapped = { startBtnClick() })
+                    WelcomeCompose(onButtonTapped = { startBtnClick() })
                 }
             }
         }

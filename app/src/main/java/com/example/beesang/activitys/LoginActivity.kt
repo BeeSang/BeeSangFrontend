@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.beesang.login.Login
+import com.example.beesang.composes.login.LoginCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
 class LoginActivity : ComponentActivity() {
@@ -23,7 +23,7 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Login()
+                    LoginCompose()
                 }
             }
         }
@@ -36,6 +36,6 @@ class LoginActivity : ComponentActivity() {
 @Composable
 fun LoginPreview() {
     BeeSangTheme {
-        Login()
+        LoginCompose()
     }
 }
