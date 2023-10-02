@@ -42,7 +42,7 @@ fun WelcomeCompose(
     TopLevel(modifier = modifier) {
         WholeLayout {
             AutoLayout(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)) {
-                BackgroundImg1(
+                BackgroundImg(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -133,11 +133,11 @@ private fun WelcomePreview() {
 }
 
 @Composable
-fun BackgroundImg1(modifier: Modifier = Modifier) {
+fun BackgroundImg(modifier: Modifier = Modifier) {
     RelayImage(
-        image = painterResource(R.drawable.welcome_background_img_1),
+        image = painterResource(R.drawable.welcome_background_img),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(927.0.dp)
+        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(932.0.dp)
     )
 }
 

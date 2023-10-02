@@ -14,7 +14,7 @@ import com.example.beesang.activitys.LoginActivity
 import com.example.beesang.composes.welcome.WelcomeCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
-import com.example.beesang.welcome.Welcome
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +46,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WelcomePreview() {
     BeeSangTheme {
-        Welcome()
+        WelcomeCompose()
     }
 }
