@@ -30,6 +30,18 @@
             android:exported="false">
         </activity>
 
+        <!-- Home Activity -->
+        <activity
+            android:name=".activitys.HomeActivity"
+            android:exported="false">
+        </activity>
+
+        <!-- Register Activity -->
+        <activity
+            android:name=".activitys.RegisterActivity"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>

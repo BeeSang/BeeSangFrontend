@@ -1,4 +1,4 @@
-package com.example.beesang
+package com.example.beesang.activitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,43 +7,28 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.beesang.activitys.LoginActivity
-import com.example.beesang.composes.welcome.WelcomeCompose
+import com.example.beesang.register.Register
 import com.example.beesang.ui.theme.BeeSangTheme
 
-
-
-class MainActivity : ComponentActivity() {
+class RegisterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BeeSangTheme {
-                // A surface container using the 'background' color from the theme
-                // initial commit2
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    WelcomeCompose(onButtonTapped = { startBtnClick() })
+                    Register(onBackBtnTapped = { backBtnClick() })
                 }
             }
         }
     }
 
-    private fun startBtnClick() {
+    private fun backBtnClick() {
         Intent(this, LoginActivity::class.java).also {
             startActivity(it)
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun WelcomePreview() {
-    BeeSangTheme {
-        WelcomeCompose()
     }
 }

@@ -1,5 +1,6 @@
 package com.example.beesang.activitys
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,15 +18,27 @@ class LoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BeeSangTheme {
-                // A surface container using the 'background' color from the theme
-                // initial commit2
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginCompose()
+                    LoginCompose(
+                        onEnterBtnTapped = { enterBtnClick() },
+                        onRegisterBtnTapped = { registerBtnClick() }
+                    )
                 }
             }
+        }
+    }
+
+    private fun enterBtnClick() {
+        Intent(this, HomeActivity::class.java).also {
+            startActivity(it)
+        }
+    }
+    private fun registerBtnClick() {
+        Intent(this, RegisterActivity::class.java).also {
+            startActivity(it)
         }
     }
 }
