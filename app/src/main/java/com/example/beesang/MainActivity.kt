@@ -15,7 +15,6 @@ import com.example.beesang.composes.welcome.WelcomeCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

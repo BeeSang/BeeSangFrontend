@@ -1,0 +1,26 @@
+//GET REQUEST
+val call = ApiObject.getRetrofitService.getUserInfo()
+        call.enqueue(object : Callback<UserInfo> {
+            override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+                if(response.isSuccessful) {
+                    Log.i("Response", response.body()?.res.toString())
+                }
+            }
+            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+                Log.e("Error", t.toString())
+        }
+})
+
+//POST REQUEST
+val data = UserPostDto("testId", "testPw")
+val call3 = ApiObject.getRetrofitService.postUserInfo3(data)
+call3.enqueue(object: Callback<UserInfo> {
+    override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+        if(response.isSuccessful) {
+            Log.i("Response", response.body()?.res.toString())
+        }
+    }
+    override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+        Log.e("Error", t.toString())
+    }
+})
