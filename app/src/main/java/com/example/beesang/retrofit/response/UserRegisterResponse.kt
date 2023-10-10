@@ -1,5 +1,5 @@
 package com.example.beesang.retrofit.response
 
-data class UserInfo(
+data class UserRegisterResponse (
     val res: String
 )
