@@ -1,9 +1,9 @@
 package com.example.beesang.retrofit.request
 
 data class UserRegisterRequest(
-    val id: String,
+    val schoolName: String,
+    val studentId: String,
+    val userEmail: String,
     val password: String,
-    val name: String,
-    val school: String,
-    val schoolId: String
+    val username: String,
 )

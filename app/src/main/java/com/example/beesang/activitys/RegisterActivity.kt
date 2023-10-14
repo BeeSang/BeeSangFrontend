@@ -69,21 +69,21 @@ class RegisterActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var id by rememberSaveable { mutableStateOf("") }
+                    var userEmail by rememberSaveable { mutableStateOf("") }
                     var password by rememberSaveable { mutableStateOf("") }
                     var checkPassword by rememberSaveable { mutableStateOf("") }
-                    var name by rememberSaveable { mutableStateOf("") }
-                    var school by rememberSaveable { mutableStateOf("") }
+                    var username by rememberSaveable { mutableStateOf("") }
+                    var schoolName by rememberSaveable { mutableStateOf("") }
                     var studentId by rememberSaveable { mutableStateOf("") }
 
                     RegisterCompose(
-                        id, onIdChange = { id = it },
+                        userEmail, onIdChange = { userEmail = it },
                         password, onPasswordChange = { password = it },
                         checkPassword, onCheckPasswordChange = { checkPassword = it },
-                        name, onNameChange = { name = it },
-                        school, onSchoolChange = { school = it },
+                        username, onNameChange = { username = it },
+                        schoolName, onSchoolChange = { schoolName = it },
                         studentId, onStudentIdChange = { studentId = it },
-                        onRegisterBtnTapped = { registerBtnClick(id, password, checkPassword, name, school, studentId) },
+                        onRegisterBtnTapped = { registerBtnClick(schoolName, studentId, userEmail, password, checkPassword, username) },
                         onBackBtn2Tapped = { backBtnClick() }
                     )
 
@@ -92,16 +92,16 @@ class RegisterActivity : ComponentActivity() {
         }
     }
 
-    private fun registerBtnClick(id: String, password: String, checkPassword: String, name: String, school: String, schoolId: String) {
+    private fun registerBtnClick(schoolName: String, studentId: String, userEmail: String,
+                                 password: String, checkPassword: String, username: String) {
         //ID, PW 유효성 검사
-
         if(password != checkPassword) {
             Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
             return
         }
 
         //POST REQUEST
-        val data = UserRegisterRequest(id, password, name, school, schoolId)
+        val data = UserRegisterRequest(schoolName, studentId, userEmail, password, username)
         val call = ApiObject.getRetrofitService.userRegisterRequest(data)
         call.enqueue(object: Callback<UserRegisterResponse> {
             override fun onResponse(call: Call<UserRegisterResponse>, response: Response<UserRegisterResponse>) {

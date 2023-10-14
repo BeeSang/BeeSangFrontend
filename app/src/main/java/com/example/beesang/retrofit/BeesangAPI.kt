@@ -11,12 +11,10 @@ import retrofit2.http.POST
 
 interface BeesangAPI {
 
-    //Call<ResponseDto>
+//    @GET("user/info")
+//    fun getUserInfo(): Call<UserLoginResponse>
 
-    @GET("user/info")
-    fun getUserInfo(): Call<UserLoginResponse>
-
-    @POST("user/info")
+    @POST("user/login")
     fun userLoginRequest(@Body jsonParams: UserLoginRequest): Call<UserLoginResponse>
 
     @POST("user/register")
