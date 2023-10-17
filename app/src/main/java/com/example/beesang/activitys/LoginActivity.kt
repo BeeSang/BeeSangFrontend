@@ -2,7 +2,6 @@ package com.example.beesang.activitys
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,7 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.example.beesang.composes.login.LoginCompose
+import com.example.beesang.composes.layout.LoginCompose
 import com.example.beesang.retrofit.ApiObject
 import com.example.beesang.retrofit.TokenStorage
 import com.example.beesang.retrofit.request.UserLoginRequest
@@ -23,8 +22,6 @@ import com.example.beesang.ui.theme.BeeSangTheme
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.FileOutputStream
-import java.io.OutputStreamWriter
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

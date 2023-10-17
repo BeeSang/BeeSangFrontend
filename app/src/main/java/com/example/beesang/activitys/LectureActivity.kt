@@ -8,11 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.beesang.composes.home.HomeCompose
+import com.example.beesang.composes.lecture.LectureCompose
 import com.example.beesang.home.Home
 import com.example.beesang.ui.theme.BeeSangTheme
 
-class HomeActivity : ComponentActivity() {
+class LectureActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -21,20 +21,22 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeCompose(
-                        onLectureBtnTapped= { onLectureBtnTapped() },
-                        onGameBtnTapped = {},
-                        onAssignBtnTapped = {},
-                        onMypageBtnTapped = {},
-                        onLogoutBtnTapped = {}
+                    LectureCompose(
+                        onBackBtnTapped = { onBackBtnTapped() },
+                        onHomeBtnTapped = { onHomeBtnTapped() }
                     )
                 }
             }
         }
     }
 
-    private fun onLectureBtnTapped() {
-        Intent(this, LectureActivity::class.java).apply {
+    private fun onBackBtnTapped() {
+        Intent(this, HomeActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+    private fun onHomeBtnTapped() {
+        Intent(this, HomeActivity::class.java).apply {
             startActivity(this)
         }
     }

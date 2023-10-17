@@ -1,4 +1,4 @@
-package com.example.beesang.composes.login
+package com.example.beesang.composes.layout
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -11,6 +11,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -164,38 +168,38 @@ fun LoginCompose(
                             alignment = Alignment.Center,
                             offset = DpOffset(
                                 x = 99.5.dp,
-                                y = 81.0.dp
+                                y = 45.0.dp
                             )
                         )
                     )
-                    RememberIdBox(
-                        modifier = Modifier.boxAlign(
-                            alignment = Alignment.TopStart,
-                            offset = DpOffset(
-                                x = 78.0.dp,
-                                y = 315.0.dp
-                            )
-                        )
-                    ) {
-                        RememberIdText(
-                            modifier = Modifier.boxAlign(
-                                alignment = Alignment.Center,
-                                offset = DpOffset(
-                                    x = 11.5.dp,
-                                    y = -0.5.dp
-                                )
-                            )
-                        )
-                        RememberCheckBox(
-                            modifier = Modifier.boxAlign(
-                                alignment = Alignment.Center,
-                                offset = DpOffset(
-                                    x = -34.0.dp,
-                                    y = 1.0.dp
-                                )
-                            )
-                        )
-                    }
+//                    RememberIdBox(
+//                        modifier = Modifier.boxAlign(
+//                            alignment = Alignment.TopStart,
+//                            offset = DpOffset(
+//                                x = 78.0.dp,
+//                                y = 280.0.dp
+//                            )
+//                        )
+//                    ) {
+//                        RememberIdText(
+//                            modifier = Modifier.boxAlign(
+//                                alignment = Alignment.Center,
+//                                offset = DpOffset(
+//                                    x = 11.5.dp,
+//                                    y = -0.5.dp
+//                                )
+//                            )
+//                        )
+//                        RememberCheckBox(
+//                            modifier = Modifier.boxAlign(
+//                                alignment = Alignment.Center,
+//                                offset = DpOffset(
+//                                    x = -34.0.dp,
+//                                    y = 1.0.dp
+//                                )
+//                            )
+//                        )
+//                    }
                     Title(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
@@ -210,12 +214,45 @@ fun LoginCompose(
         }
     }
 }
+
+@Preview(widthDp = 430, heightDp = 927)
+@Composable
+private fun LoginPreview() {
+    MaterialTheme {
+        RelayContainer {
+            var userEmail by rememberSaveable { mutableStateOf("") }
+            var password by rememberSaveable { mutableStateOf("") }
+
+            LoginCompose(
+                userEmail, onUserEmailChange = { userEmail = it },
+                password, onPasswordChange = { password = it },
+                onFindPasswordBtnTapped = { findPasswordBtnClick() },
+                onEnterBtnTapped = { enterBtnClick(userEmail, password) },
+                onRegisterBtnTapped = { registerBtnClick() }
+            )
+        }
+    }
+}
+
+private fun enterBtnClick(userEmail: String, password: String) {
+
+}
+private fun registerBtnClick() {
+
+}
+private fun findPasswordBtnClick() {
+    //go to findPwd activity
+}
+
+
 @Composable
 fun BackgroundImg(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.login_background_img),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(932.0.dp)
+        modifier = modifier
+            .requiredWidth(430.0.dp)
+            .requiredHeight(932.0.dp)
     )
 }
 
@@ -287,7 +324,7 @@ fun InputBox(
         itemSpacing = 22.0,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredHeight(187.0.dp)
+        modifier = modifier.requiredHeight(160.0.dp)
     )
 }
 
@@ -300,7 +337,9 @@ fun MiddleGroup(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(274.0.dp).requiredHeight(187.0.dp)
+        modifier = modifier
+            .requiredWidth(274.0.dp)
+            .requiredHeight(160.0.dp)
     )
 }
 
@@ -308,19 +347,22 @@ fun MiddleGroup(
 fun EnteRectangle(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.login_ente_rectangle),
-        modifier = modifier.requiredWidth(123.0.dp).requiredHeight(47.0.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 50.0.dp,
-            blur = 4.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .requiredWidth(123.0.dp)
+            .requiredHeight(47.0.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 50.0.dp,
+                blur = 4.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -329,7 +371,9 @@ fun EnterText(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.login_enter_text),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(85.6123046875.dp).requiredHeight(22.830078125.dp)
+        modifier = modifier
+            .requiredWidth(85.6123046875.dp)
+            .requiredHeight(22.830078125.dp)
     )
 }
 
@@ -343,7 +387,10 @@ fun EnterBtn(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.tappable(onTap = onEnterBtnTapped).requiredWidth(123.0.dp).requiredHeight(47.0.dp)
+        modifier = modifier
+            .tappable(onTap = onEnterBtnTapped)
+            .requiredWidth(123.0.dp)
+            .requiredHeight(47.0.dp)
     )
 }
 
@@ -351,19 +398,22 @@ fun EnterBtn(
 fun RegisterRectangle(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.login_register_rectangle),
-        modifier = modifier.requiredWidth(122.0.dp).requiredHeight(47.0.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 50.0.dp,
-            blur = 4.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .requiredWidth(122.0.dp)
+            .requiredHeight(47.0.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 50.0.dp,
+                blur = 4.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -372,7 +422,9 @@ fun RegisterText(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.login_register_text),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(85.6123046875.dp).requiredHeight(22.830078125.dp)
+        modifier = modifier
+            .requiredWidth(85.6123046875.dp)
+            .requiredHeight(22.830078125.dp)
     )
 }
 
@@ -386,7 +438,10 @@ fun RegisterBtn(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.tappable(onTap = onRegisterBtnTapped).requiredWidth(122.0.dp).requiredHeight(47.0.dp)
+        modifier = modifier
+            .tappable(onTap = onRegisterBtnTapped)
+            .requiredWidth(122.0.dp)
+            .requiredHeight(47.0.dp)
     )
 }
 
@@ -399,7 +454,9 @@ fun ButtonBox(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(275.0.dp).requiredHeight(47.0.dp)
+        modifier = modifier
+            .requiredWidth(275.0.dp)
+            .requiredHeight(47.0.dp)
     )
 }
 
@@ -421,58 +478,63 @@ fun FindPasswordBtn(
         height = 1.4479999542236328.em,
         textAlign = TextAlign.Left,
         underline = true,
-        modifier = modifier.tappable(onTap = onFindPasswordBtnTapped).wrapContentHeight(
-            align = Alignment.Bottom,
-            unbounded = true
-        )
-    )
-}
-
-@Composable
-fun RememberIdText(modifier: Modifier = Modifier) {
-    RelayText(
-        content = "아이디 저장",
-        fontSize = 13.0.sp,
-        fontFamily = notoSansKR,
-        color = Color(
-            alpha = 255,
-            red = 115,
-            green = 115,
-            blue = 115
-        ),
-        height = 1.4479999542236328.em,
-        textAlign = TextAlign.Left,
         modifier = modifier
+            .tappable(onTap = onFindPasswordBtnTapped)
+            .wrapContentHeight(
+                align = Alignment.Bottom,
+                unbounded = true
+            )
     )
 }
 
-@Composable
-fun RememberCheckBox(modifier: Modifier = Modifier) {
-    RelayVector(
-        vector = painterResource(R.drawable.login_remember_check_box),
-        modifier = modifier.requiredWidth(18.0.dp).requiredHeight(18.0.dp)
-    )
-}
-
-@Composable
-fun RememberIdBox(
-    modifier: Modifier = Modifier,
-    content: @Composable RelayContainerScope.() -> Unit
-) {
-    RelayContainer(
-        isStructured = false,
-        clipToParent = false,
-        content = content,
-        modifier = modifier.requiredWidth(86.0.dp).requiredHeight(20.0.dp)
-    )
-}
+//@Composable
+//fun RememberIdText(modifier: Modifier = Modifier) {
+//    RelayText(
+//        content = "아이디 저장",
+//        fontSize = 13.0.sp,
+//        fontFamily = notoSansKR,
+//        color = Color(
+//            alpha = 255,
+//            red = 115,
+//            green = 115,
+//            blue = 115
+//        ),
+//        height = 1.4479999542236328.em,
+//        textAlign = TextAlign.Left,
+//        modifier = modifier
+//    )
+//}
+//
+//@Composable
+//fun RememberCheckBox(modifier: Modifier = Modifier) {
+//    Checkbox(checked = false, onCheckedChange = {
+//
+//    })
+//}
+//
+//@Composable
+//fun RememberIdBox(
+//    modifier: Modifier = Modifier,
+//    content: @Composable RelayContainerScope.() -> Unit
+//) {
+//    RelayContainer(
+//        isStructured = false,
+//        clipToParent = false,
+//        content = content,
+//        modifier = modifier
+//            .requiredWidth(120.0.dp)
+//            .requiredHeight(20.0.dp)
+//    )
+//}
 
 @Composable
 fun Title(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.login_title),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(153.0.dp).requiredHeight(64.0.dp)
+        modifier = modifier
+            .requiredWidth(153.0.dp)
+            .requiredHeight(64.0.dp)
     )
 }
 
@@ -484,7 +546,9 @@ fun MiddleFrame(
     RelayContainer(
         isStructured = false,
         content = content,
-        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(487.0.dp)
+        modifier = modifier
+            .requiredWidth(430.0.dp)
+            .requiredHeight(487.0.dp)
     )
 }
 
@@ -536,6 +600,8 @@ fun TopLevel(
         ),
         isStructured = false,
         content = content,
-        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
+        modifier = modifier
+            .fillMaxWidth(1.0f)
+            .fillMaxHeight(1.0f)
     )
 }
