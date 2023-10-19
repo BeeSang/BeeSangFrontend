@@ -47,6 +47,18 @@
             android:exported="false">
         </activity>
 
+        <!-- Lecture Activity -->
+        <activity
+            android:name=".activitys.LectureActivity"
+            android:exported="false">
+        </activity>
+
+        <!-- Assignment Activity -->
+        <activity
+            android:name=".activitys.AssignmentActivity"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>
