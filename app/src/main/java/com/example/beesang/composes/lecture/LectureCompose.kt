@@ -1,5 +1,6 @@
 package com.example.beesang.composes.lecture
 
+import android.util.Log
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,8 +23,13 @@ import com.example.beesang.composes.NavigationBar
 import com.example.beesang.composes.TopLevel
 import com.example.beesang.composes.layout.BackgroundImg
 import com.example.beesang.login.notoSansKR
+import com.example.beesang.retrofit.ApiObject
+import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayText
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 @Composable
@@ -63,6 +69,24 @@ fun LectureCompose(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
             ) {
+                val call = ApiObject.getRetrofitService.chapterReadRequest()
+                call.enqueue(object : Callback<ChapterReadResponse> {
+                    override fun onResponse(call: Call<ChapterReadResponse>, response: Response<ChapterReadResponse>) {
+                        if(response.isSuccessful) {
+                            Log.i("Response", "Success")
+                            repeat(response.body()?.chapters?.size!!) {
+                                Log.i("Response", response.body()?.chapters?.get(it)?.title.toString())
+                            }
+                        } else {
+                            Log.i("ERROR!!!", response.code().toString())
+                            Log.i("ERROR!!!", response.message().toString())
+                        }
+                    }
+                    override fun onFailure(call: Call<ChapterReadResponse>, t: Throwable) {
+                        Log.e("Error", t.toString())
+                    }
+                })
+                Log.i("Response", "End")
                 repeat(10) {
                     LectureWeekCard()
                     Spacer(modifier = Modifier.height(50.0.dp))

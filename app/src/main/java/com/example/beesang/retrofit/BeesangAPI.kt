@@ -2,6 +2,7 @@ package com.example.beesang.retrofit
 
 import com.example.beesang.retrofit.request.UserLoginRequest
 import com.example.beesang.retrofit.request.UserRegisterRequest
+import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.example.beesang.retrofit.response.UserLoginResponse
 import com.example.beesang.retrofit.response.UserRegisterResponse
 import retrofit2.Call
@@ -19,4 +20,7 @@ interface BeesangAPI {
 
     @POST("user/register")
     fun userRegisterRequest(@Body jsonParams: UserRegisterRequest): Call<UserRegisterResponse>
+
+    @GET("study/chapter/readAll")
+    fun chapterReadRequest(): Call<ChapterReadResponse>
 }
