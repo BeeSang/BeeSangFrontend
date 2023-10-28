@@ -23,4 +23,7 @@ interface BeesangAPI {
 
     @GET("study/chapter/readAll")
     fun chapterReadRequest(): Call<ChapterReadResponse>
+
+    @GET("study/lecture/readAll/{chapterId}")
+    fun lectureReadRequest(): Call<ChapterReadResponse>
 }
