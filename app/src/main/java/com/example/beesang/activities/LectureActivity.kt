@@ -27,7 +27,7 @@ class LectureActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     LectureCompose(
-                        onCardTapped = { week -> onCardTapped(week)},
+                        onCardTapped = { week, title -> onCardTapped(week, title)},
                         onBackBtnTapped = { onBackBtnTapped() },
                         onHomeBtnTapped = { onHomeBtnTapped() }
                     )
@@ -47,9 +47,10 @@ class LectureActivity : ComponentActivity() {
         }
     }
 
-    private fun onCardTapped(week: Int) {
+    private fun onCardTapped(week: Int, title: String) {
         val intent = Intent(this, ChapterActivity::class.java)
         intent.putExtra("week", week)
+        intent.putExtra("title", title)
         startActivity(intent)
     }
 }

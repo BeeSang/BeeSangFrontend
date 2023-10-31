@@ -3,17 +3,16 @@ package com.example.beesang.retrofit
 import com.example.beesang.retrofit.request.UserLoginRequest
 import com.example.beesang.retrofit.request.UserRegisterRequest
 import com.example.beesang.retrofit.response.ChapterReadResponse
+import com.example.beesang.retrofit.response.LectureReadResponse
 import com.example.beesang.retrofit.response.UserLoginResponse
 import com.example.beesang.retrofit.response.UserRegisterResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface BeesangAPI {
-
-//    @GET("user/info")
-//    fun getUserInfo(): Call<UserLoginResponse>
 
     @POST("user/login")
     fun userLoginRequest(@Body jsonParams: UserLoginRequest): Call<UserLoginResponse>
@@ -25,5 +24,5 @@ interface BeesangAPI {
     fun chapterReadRequest(): Call<List<ChapterReadResponse>>
 
     @GET("study/lecture/readAll/{chapterId}")
-    fun lectureReadRequest(): Call<ChapterReadResponse>
+    fun lectureReadRequest(@Path(value = "chapterId") chapterId: Int): Call<List<LectureReadResponse>>
 }

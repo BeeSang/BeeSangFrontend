@@ -1,18 +1,13 @@
 package com.example.beesang.composes.lecture
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.util.Log
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,8 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beesang.composes.NavigationBar
@@ -31,7 +24,6 @@ import com.example.beesang.composes.layout.BackgroundImg
 import com.example.beesang.login.notoSansKR
 import com.example.beesang.retrofit.ApiObject
 import com.example.beesang.retrofit.response.ChapterReadResponse
-import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +38,7 @@ import kotlin.coroutines.suspendCoroutine
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun LectureCompose(
-    onCardTapped: (Int) -> Unit = {},
+    onCardTapped: (Int, String) -> Unit,
     onBackBtnTapped: () -> Unit = {},
     onHomeBtnTapped: () -> Unit = {},
     modifier: Modifier = Modifier
@@ -84,7 +76,7 @@ fun LectureCompose(
             ) {
                 val scope = CoroutineScope(Dispatchers.IO)
                 val results = remember { mutableStateOf<List<ChapterReadResponse>?>(null) }
-                scope.launch { results.value = getLectureData() }
+                scope.launch { results.value = getChapterData() }
 
                 results.value?.let {
                     for(i in it.indices) {
@@ -97,7 +89,7 @@ fun LectureCompose(
     }
 }
 
-suspend fun getLectureData(): List<ChapterReadResponse> = suspendCoroutine {
+suspend fun getChapterData(): List<ChapterReadResponse> = suspendCoroutine {
     val call = ApiObject.getRetrofitService.chapterReadRequest()
     call.enqueue(object : Callback<List<ChapterReadResponse>> {
         override fun onResponse(call: Call<List<ChapterReadResponse>>, response: Response<List<ChapterReadResponse>>) {

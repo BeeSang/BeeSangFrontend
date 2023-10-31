@@ -21,7 +21,12 @@ class ChapterActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val week = intent.getIntExtra("week", 0)
-                    ChapterCompose()
+                    val title = intent.getStringExtra("title")
+
+                    ChapterCompose(
+                        week,
+                        title
+                    )
                 }
             }
         }
