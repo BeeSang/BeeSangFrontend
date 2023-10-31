@@ -1,4 +1,4 @@
-package com.example.beesang.activitys
+package com.example.beesang.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,11 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.beesang.composes.home.HomeCompose
-import com.example.beesang.home.Home
+import com.example.beesang.composes.assignment.AssignmentCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
-class HomeActivity : ComponentActivity() {
+class AssignmentActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -21,26 +20,22 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeCompose(
-                        onLectureBtnTapped= { onLectureBtnTapped() },
-                        onGameBtnTapped = {},
-                        onAssignBtnTapped = { onAssignBtnTapped() },
-                        onMypageBtnTapped = {},
-                        onLogoutBtnTapped = {}
+                    AssignmentCompose(
+                        onBackBtnTapped = { onBackBtnTapped() },
+                        onHomeBtnTapped = { onHomeBtnTapped() }
                     )
                 }
             }
         }
     }
 
-    private fun onLectureBtnTapped() {
-        Intent(this, LectureActivity::class.java).apply {
+    private fun onBackBtnTapped() {
+        Intent(this, HomeActivity::class.java).apply {
             startActivity(this)
         }
     }
-
-    private fun onAssignBtnTapped() {
-        Intent(this, AssignmentActivity::class.java).apply {
+    private fun onHomeBtnTapped() {
+        Intent(this, HomeActivity::class.java).apply {
             startActivity(this)
         }
     }

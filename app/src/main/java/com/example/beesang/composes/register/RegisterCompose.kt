@@ -22,9 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.beesang.R
-import com.example.beesang.activitys.LoginActivity
 import com.example.beesang.login.notoSansKR
-import com.google.gson.annotations.SerializedName
 import com.google.relay.compose.CrossAxisAlignment
 import com.google.relay.compose.MainAxisAlignment
 import com.google.relay.compose.RelayContainer

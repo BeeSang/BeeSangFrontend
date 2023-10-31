@@ -1,4 +1,4 @@
-package com.example.beesang.activitys
+package com.example.beesang.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,11 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.beesang.composes.assignment.AssignmentCompose
-import com.example.beesang.composes.lecture.LectureCompose
+import com.example.beesang.composes.home.HomeCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
-class AssignmentActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -21,22 +20,26 @@ class AssignmentActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AssignmentCompose(
-                        onBackBtnTapped = { onBackBtnTapped() },
-                        onHomeBtnTapped = { onHomeBtnTapped() }
+                    HomeCompose(
+                        onLectureBtnTapped= { onLectureBtnTapped() },
+                        onGameBtnTapped = {},
+                        onAssignBtnTapped = { onAssignBtnTapped() },
+                        onMypageBtnTapped = {},
+                        onLogoutBtnTapped = {}
                     )
                 }
             }
         }
     }
 
-    private fun onBackBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
+    private fun onLectureBtnTapped() {
+        Intent(this, LectureActivity::class.java).apply {
             startActivity(this)
         }
     }
-    private fun onHomeBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
+
+    private fun onAssignBtnTapped() {
+        Intent(this, AssignmentActivity::class.java).apply {
             startActivity(this)
         }
     }

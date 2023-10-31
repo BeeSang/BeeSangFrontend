@@ -1,4 +1,4 @@
-package com.example.beesang.activitys
+package com.example.beesang.activities
 
 import android.content.Intent
 import android.os.Bundle

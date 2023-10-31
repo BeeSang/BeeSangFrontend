@@ -1,15 +1,21 @@
 package com.example.beesang.composes.lecture
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,13 +33,20 @@ import com.example.beesang.retrofit.ApiObject
 import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun LectureCompose(
+    onCardTapped: (Int) -> Unit = {},
     onBackBtnTapped: () -> Unit = {},
     onHomeBtnTapped: () -> Unit = {},
     modifier: Modifier = Modifier
@@ -69,44 +82,49 @@ fun LectureCompose(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
             ) {
-                val call = ApiObject.getRetrofitService.chapterReadRequest()
-                call.enqueue(object : Callback<ChapterReadResponse> {
-                    override fun onResponse(call: Call<ChapterReadResponse>, response: Response<ChapterReadResponse>) {
-                        if(response.isSuccessful) {
-                            Log.i("Response", "Success")
-                            repeat(response.body()?.chapters?.size!!) {
-                                Log.i("Response", response.body()?.chapters?.get(it)?.title.toString())
-                            }
-                        } else {
-                            Log.i("ERROR!!!", response.code().toString())
-                            Log.i("ERROR!!!", response.message().toString())
-                        }
+                val scope = CoroutineScope(Dispatchers.IO)
+                val results = remember { mutableStateOf<List<ChapterReadResponse>?>(null) }
+                scope.launch { results.value = getLectureData() }
+
+                results.value?.let {
+                    for(i in it.indices) {
+                        LectureWeekCard(onCardTapped, it[i].week, it[i].title)
+                        Spacer(modifier = Modifier.height(20.0.dp))
                     }
-                    override fun onFailure(call: Call<ChapterReadResponse>, t: Throwable) {
-                        Log.e("Error", t.toString())
-                    }
-                })
-                Log.i("Response", "End")
-                repeat(10) {
-                    LectureWeekCard()
-                    Spacer(modifier = Modifier.height(50.0.dp))
                 }
             }
         }
-
     }
 }
 
-@Preview(widthDp = 430, heightDp = 927)
-@Composable
-private fun LecturePreview() {
-    MaterialTheme {
-        RelayContainer {
-            LectureCompose(
-                modifier = Modifier
-                    .rowWeight(1.0f)
-                    .columnWeight(1.0f)
-            )
+suspend fun getLectureData(): List<ChapterReadResponse> = suspendCoroutine {
+    val call = ApiObject.getRetrofitService.chapterReadRequest()
+    call.enqueue(object : Callback<List<ChapterReadResponse>> {
+        override fun onResponse(call: Call<List<ChapterReadResponse>>, response: Response<List<ChapterReadResponse>>) {
+            if(response.isSuccessful) {
+                val responseBody = response.body()!!
+                it.resume(responseBody)
+            } else {
+                it.resume(emptyList())
+            }
         }
-    }
+        override fun onFailure(call: Call<List<ChapterReadResponse>>, t: Throwable) {
+            Log.e("Error", t.toString())
+            it.resume(emptyList())
+        }
+    })
 }
+
+//@Preview(widthDp = 430, heightDp = 927)
+//@Composable
+//private fun LecturePreview() {
+//    MaterialTheme {
+//        RelayContainer {
+//            LectureCompose(
+//                modifier = Modifier
+//                    .rowWeight(1.0f)
+//                    .columnWeight(1.0f)
+//            )
+//        }
+//    }
+//}

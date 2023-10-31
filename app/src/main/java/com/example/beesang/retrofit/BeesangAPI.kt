@@ -22,7 +22,7 @@ interface BeesangAPI {
     fun userRegisterRequest(@Body jsonParams: UserRegisterRequest): Call<UserRegisterResponse>
 
     @GET("study/chapter/readAll")
-    fun chapterReadRequest(): Call<ChapterReadResponse>
+    fun chapterReadRequest(): Call<List<ChapterReadResponse>>
 
     @GET("study/lecture/readAll/{chapterId}")
     fun lectureReadRequest(): Call<ChapterReadResponse>

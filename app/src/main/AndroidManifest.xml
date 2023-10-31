@@ -31,31 +31,37 @@
 
         <!-- Login Activity -->
         <activity
-            android:name=".activitys.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="false">
         </activity>
 
         <!-- Home Activity -->
         <activity
-            android:name=".activitys.HomeActivity"
+            android:name=".activities.HomeActivity"
             android:exported="false">
         </activity>
 
         <!-- Register Activity -->
         <activity
-            android:name=".activitys.RegisterActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="false">
         </activity>
 
         <!-- Lecture Activity -->
         <activity
-            android:name=".activitys.LectureActivity"
+            android:name=".activities.LectureActivity"
             android:exported="false">
         </activity>
 
         <!-- Assignment Activity -->
         <activity
-            android:name=".activitys.AssignmentActivity"
+            android:name=".activities.AssignmentActivity"
+            android:exported="false">
+        </activity>
+
+        <!-- Chapter Activity -->
+        <activity
+            android:name=".activities.ChapterActivity"
             android:exported="false">
         </activity>
 
