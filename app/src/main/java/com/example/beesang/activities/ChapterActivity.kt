@@ -1,5 +1,6 @@
 package com.example.beesang.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -25,10 +26,23 @@ class ChapterActivity : ComponentActivity() {
 
                     ChapterCompose(
                         week,
-                        title
+                        title,
+                        onBackBtnTapped = { onBackBtnTapped() },
+                        onHomeBtnTapped = { onHomeBtnTapped() }
                     )
                 }
             }
+        }
+    }
+
+    private fun onBackBtnTapped() {
+        Intent(this, LectureActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+    private fun onHomeBtnTapped() {
+        Intent(this, HomeActivity::class.java).apply {
+            startActivity(this)
         }
     }
 }
