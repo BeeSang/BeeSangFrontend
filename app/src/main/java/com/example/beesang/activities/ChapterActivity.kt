@@ -45,4 +45,8 @@ class ChapterActivity : ComponentActivity() {
             startActivity(this)
         }
     }
+
+    private fun chapterCardTapped() {
+
+    }
 }

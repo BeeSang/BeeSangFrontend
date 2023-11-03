@@ -18,8 +18,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -37,6 +39,7 @@ import com.example.beesang.login.notoSansKR
 import com.example.beesang.retrofit.ApiObject
 import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.example.beesang.retrofit.response.LectureReadResponse
+import com.example.beesang.retrofit.response.QuizReadResponse
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayText
 import com.google.relay.compose.relayBorder
@@ -88,12 +91,43 @@ fun ChapterCompose(
                     .padding(start = 20.0.dp, end = 20.0.dp)
             )
 //            Spacer(modifier = Modifier.height(50.0.dp))
+            var isColumnVisible by remember { mutableStateOf(true) }
+            var color1: Color
+            var color2: Color
+            if(isColumnVisible) {
+                color1 = Color(
+                    alpha = 255,
+                    red = 255,
+                    green = 198,
+                    blue = 0
+                )
+                color2 = Color(
+                    alpha = 255,
+                    red = 205,
+                    green = 205,
+                    blue = 205
+                )
+            } else {
+                color1 = Color(
+                    alpha = 255,
+                    red = 205,
+                    green = 205,
+                    blue = 205
+                )
+                color2 = Color(
+                    alpha = 255,
+                    red = 255,
+                    green = 198,
+                    blue = 0
+                )
+            }
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth(1.0f)
             ) {
                 TextButton(
-                    onClick = {},
+                    onClick = {isColumnVisible = true},
                     modifier = Modifier
                         .fillMaxWidth(0.5f)
                         .drawBehind {
@@ -101,12 +135,7 @@ fun ChapterCompose(
                             val y = size.height - strokeWidth / 2
 
                             drawLine(
-                                color = Color(
-                                    alpha = 255,
-                                    red = 255,
-                                    green = 198,
-                                    blue = 0
-                                ),
+                                color = color1,
                                 Offset(0f, y),
                                 Offset(size.width, y),
                                 strokeWidth * 5
@@ -118,17 +147,12 @@ fun ChapterCompose(
                         fontSize = 20.0.sp,
                         fontWeight = FontWeight(700.0.toInt()),
                         fontFamily = notoSansKR,
-                        color = Color(
-                            alpha = 255,
-                            red = 255,
-                            green = 198,
-                            blue = 0
-                        ),
+                        color = color1,
                         lineHeight = 20.0.sp,
                     )
                 }
                 TextButton(
-                    onClick = {},
+                    onClick = {isColumnVisible = false},
                     modifier = Modifier
                         .fillMaxWidth(1.0f)
                         .drawBehind {
@@ -136,12 +160,7 @@ fun ChapterCompose(
                             val y = size.height - strokeWidth / 2
 
                             drawLine(
-                                color = Color(
-                                    alpha = 255,
-                                    red = 205,
-                                    green = 205,
-                                    blue = 205
-                                ),
+                                color = color2,
                                 Offset(0f, y),
                                 Offset(size.width, y),
                                 strokeWidth * 5
@@ -153,61 +172,49 @@ fun ChapterCompose(
                         fontSize = 20.0.sp,
                         fontWeight = FontWeight(700.0.toInt()),
                         fontFamily = notoSansKR,
-                        color = Color(
-                            alpha = 255,
-                            red = 205,
-                            green = 205,
-                            blue = 205
-                        ),
+                        color = color2,
                         lineHeight = 20.0.sp,
                     )
                 }
             }
             Spacer(modifier = Modifier.height(30.0.dp))
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-            ) {
-                val scope = CoroutineScope(Dispatchers.IO)
-                val results = remember { mutableStateOf<List<LectureReadResponse>?>(null) }
-                scope.launch { results.value = getLectureData(week) }
+            if(isColumnVisible) {
+                //Lecture
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    val scope = CoroutineScope(Dispatchers.IO)
+                    val results = remember { mutableStateOf<List<LectureReadResponse>?>(null) }
+                    scope.launch { results.value = getLectureData(week) }
 
-                ChapterTimeCard(time = 1, title = "기후발생의 발생과 원인", videoLink = "TEST")
-                Spacer(modifier = Modifier.height(30.0.dp))
-                ChapterTimeCard(time = 1, title = "기후발생의 발생과 원인", videoLink = "TEST")
-                Spacer(modifier = Modifier.height(30.0.dp))
-                ChapterTimeCard(time = 1, title = "기후발생의 발생과 원인", videoLink = "TEST")
-                Spacer(modifier = Modifier.height(30.0.dp))
-                ChapterTimeCard(time = 1, title = "기후발생의 발생과 원인", videoLink = "TEST")
-                Spacer(modifier = Modifier.height(30.0.dp))
-                ChapterTimeCard(time = 1, title = "기후발생의 발생과 원인", videoLink = "TEST")
-                Spacer(modifier = Modifier.height(30.0.dp))
+                    results.value?.let {
+                        for(i in it.indices) {
+                            Log.d("lecture", it[i].title)
+                            ChapterTimeCard(time = it[i].time, title = it[i].title, videoLink = it[i].videoLink)
+                            Spacer(modifier = Modifier.height(30.0.dp))
+                        }
+                    }
+                }
+            } else {
+                //Quiz
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    val scope = CoroutineScope(Dispatchers.IO)
+                    val results = remember { mutableStateOf<List<QuizReadResponse>?>(null) }
+                    scope.launch { results.value = getQuizData(week) }
 
-
-                results.value?.let {
-                    for(i in it.indices) {
-                        Log.d("lecture", it[i].title)
-//                    LectureWeekCard(onCardTapped, it[i].week, it[i].title)
-//                    Spacer(modifier = Modifier.height(20.0.dp))
+                    results.value?.let {
+                        for(i in it.indices) {
+//                            Log.d("lecture", it[i].title)
+//                            ChapterTimeCard(time = it[i].time, title = it[i].title, videoLink = it[i].videoLink)
+//                            Spacer(modifier = Modifier.height(30.0.dp))
+                        }
                     }
                 }
             }
-        }
-    }
-}
-
-@Preview(widthDp = 430, heightDp = 927)
-@Composable
-private fun ChapterPreview() {
-    MaterialTheme {
-        RelayContainer {
-            ChapterCompose(
-                week = 1,
-                title = "지구온난화로 인한 기후위기와 식량위기",
-                modifier = Modifier
-                    .rowWeight(1.0f)
-                    .columnWeight(1.0f)
-            )
         }
     }
 }
@@ -224,6 +231,24 @@ suspend fun getLectureData(chapterId: Int): List<LectureReadResponse> = suspendC
             }
         }
         override fun onFailure(call: Call<List<LectureReadResponse>>, t: Throwable) {
+            Log.e("Error", t.toString())
+            it.resume(emptyList())
+        }
+    })
+}
+
+suspend fun getQuizData(chapterId: Int): List<QuizReadResponse> = suspendCoroutine {
+    val call = ApiObject.getRetrofitService.quizReadRequest(chapterId)
+    call.enqueue(object : Callback<List<QuizReadResponse>> {
+        override fun onResponse(call: Call<List<QuizReadResponse>>, response: Response<List<QuizReadResponse>>) {
+            if(response.isSuccessful) {
+                val responseBody = response.body()!!
+                it.resume(responseBody)
+            } else {
+                it.resume(emptyList())
+            }
+        }
+        override fun onFailure(call: Call<List<QuizReadResponse>>, t: Throwable) {
             Log.e("Error", t.toString())
             it.resume(emptyList())
         }

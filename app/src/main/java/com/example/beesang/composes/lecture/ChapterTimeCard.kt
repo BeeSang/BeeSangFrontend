@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beesang.login.notoSansKR
 import com.google.relay.compose.BoxScopeInstance.boxAlign
-import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayText
 import com.google.relay.compose.tappable
 
@@ -27,16 +30,19 @@ fun ChapterTimeCard(
     videoLink: String,
     modifier: Modifier = Modifier,
 ) {
-    RelayContainer(
-        backgroundColor = Color(
-            alpha = 255,
-            red = 255,
-            green = 251,
-            blue = 238
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = Color(
+                alpha = 255,
+                red = 255,
+                green = 251,
+                blue = 238
+            )
         ),
+        shape = RoundedCornerShape(14.dp),
         modifier = modifier
-            .tappable (onTap = {  })
-            .requiredHeight(130.0.dp)
+            .tappable(onTap = { })
+            .requiredHeight(200.0.dp)
             .fillMaxWidth(0.8f)
             .boxAlign(
                 alignment = Alignment.Center,
@@ -46,8 +52,8 @@ fun ChapterTimeCard(
                 )
             )
     ) {
-        RelayText(
-            content = time.toString() + "차시",
+        Text(
+            text = time.toString() + "차시",
             fontSize = 20.0.sp,
             fontWeight = FontWeight(700.0.toInt()),
             fontFamily = notoSansKR,
@@ -60,7 +66,7 @@ fun ChapterTimeCard(
             textAlign = TextAlign.Center,
             modifier = modifier
                 .fillMaxWidth(1.0f)
-                .fillMaxHeight(0.2f)
+                .fillMaxHeight(0.3f)
         )
         Text(
             text = title,
@@ -77,7 +83,7 @@ fun ChapterTimeCard(
             textAlign = TextAlign.Center,
             modifier = modifier
                 .fillMaxWidth(1.0f)
-                .fillMaxHeight(0.8f)
+                .fillMaxHeight(0.7f)
                 .padding(8.0.dp)
         )
     }
