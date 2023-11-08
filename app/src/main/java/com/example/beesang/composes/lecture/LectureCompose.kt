@@ -48,7 +48,6 @@ fun LectureCompose(
         Column(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally
-
         ) {
             NavigationBar(
                 onBackBtnTapped,
@@ -62,9 +61,9 @@ fun LectureCompose(
                 fontFamily = notoSansKR,
                 color = Color(
                     alpha = 255,
-                    red = 115,
-                    green = 115,
-                    blue = 115
+                    red = 109,
+                    green = 85,
+                    blue = 0
                 ),
                 textAlign = TextAlign.Center,
                 modifier = modifier.fillMaxWidth(1.0f)

@@ -74,4 +74,10 @@ dependencies {
 
     //Volley
     implementation("com.android.volley:volley:1.2.1")
+
+    //ExoPlayer
+    implementation ("com.google.android.exoplayer:exoplayer:2.15.1")
+    implementation ("com.google.android.exoplayer:exoplayer-core:2.X.X")
+    implementation ("com.google.android.exoplayer:exoplayer-dash:2.X.X")
+    implementation ("com.google.android.exoplayer:exoplayer-ui:2.X.X")
 }

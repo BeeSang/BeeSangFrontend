@@ -208,9 +208,8 @@ fun ChapterCompose(
 
                     results.value?.let {
                         for(i in it.indices) {
-//                            Log.d("lecture", it[i].title)
-//                            ChapterTimeCard(time = it[i].time, title = it[i].title, videoLink = it[i].videoLink)
-//                            Spacer(modifier = Modifier.height(30.0.dp))
+                            QuizTimeCard(time = it[i].time, title = it[i].title, question = it[i].question, description = it[i].description, answer = it[i].answer)
+                            Spacer(modifier = Modifier.height(30.0.dp))
                         }
                     }
                 }
