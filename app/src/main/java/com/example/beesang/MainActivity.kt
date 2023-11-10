@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.beesang.activities.GameActivity
 import com.example.beesang.activities.HomeActivity
 import com.example.beesang.composes.welcome.WelcomeCompose
 import com.example.beesang.ui.theme.BeeSangTheme
@@ -39,7 +40,10 @@ class MainActivity : ComponentActivity() {
 //        }
 
 //        개발을 위한 임시 코드 - 서비스 완성 후 제거
-        Intent(this, HomeActivity::class.java).also {
+//        Intent(this, HomeActivity::class.java).also {
+//            startActivity(it)
+//        }
+        Intent(this, GameActivity::class.java).also {
             startActivity(it)
         }
     }

@@ -1,5 +1,6 @@
 package com.example.beesang.composes.assignment
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,8 +31,9 @@ fun AssignmentCompose(
     onHomeBtnTapped: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    TopLevel(modifier = modifier) {
-        BackgroundImg()
+    TopLevel(
+        modifier = modifier,
+    ) {
         Column(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally

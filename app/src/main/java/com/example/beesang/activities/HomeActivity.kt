@@ -22,9 +22,9 @@ class HomeActivity : ComponentActivity() {
                 ) {
                     HomeCompose(
                         onLectureBtnTapped= { onLectureBtnTapped() },
-                        onGameBtnTapped = {},
+                        onGameBtnTapped = { onGameBtnTapped() },
                         onAssignBtnTapped = { onAssignBtnTapped() },
-                        onMypageBtnTapped = {},
+                        onMypageBtnTapped = { onMyPageBtnTapped() },
                         onLogoutBtnTapped = {}
                     )
                 }
@@ -38,8 +38,20 @@ class HomeActivity : ComponentActivity() {
         }
     }
 
+    private fun onGameBtnTapped() {
+        Intent(this, GameActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
     private fun onAssignBtnTapped() {
         Intent(this, AssignmentActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    private fun onMyPageBtnTapped() {
+        Intent(this, MyPageActivity::class.java).apply {
             startActivity(this)
         }
     }
