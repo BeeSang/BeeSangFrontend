@@ -21,9 +21,33 @@ class GameActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GameHome()
+                    GameHome(
+                        applicationContext = applicationContext,
+                        onGameBoardTapped = { a -> gameBoardTapped(a) },
+                        onCommunityBtnTapped = { onCommunityBtnTapped() },
+                        onHomeBtnTapped = { onHomeBtnTapped() }
+                    )
                 }
             }
+        }
+    }
+
+    private fun gameBoardTapped(a: Int) {
+        //LectureActivity 참고
+        val intent = Intent(this, ChapterActivity::class.java)
+        intent.putExtra("a", a)
+        startActivity(intent)
+    }
+
+    private fun onCommunityBtnTapped() {
+        Intent(this, GameActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    private fun onHomeBtnTapped() {
+        Intent(this, HomeActivity::class.java).apply {
+            startActivity(this)
         }
     }
 }

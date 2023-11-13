@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.beesang.activities.GameActivity
 import com.example.beesang.activities.HomeActivity
+import com.example.beesang.activities.LoginActivity
 import com.example.beesang.composes.welcome.WelcomeCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
@@ -35,17 +36,17 @@ class MainActivity : ComponentActivity() {
 
     private fun startBtnClick() {
 //        서비스 완성 후 주석 해제
-//        Intent(this, LoginActivity::class.java).also {
-//            startActivity(it)
-//        }
+        Intent(this, LoginActivity::class.java).also {
+            startActivity(it)
+        }
 
 //        개발을 위한 임시 코드 - 서비스 완성 후 제거
 //        Intent(this, HomeActivity::class.java).also {
 //            startActivity(it)
 //        }
-        Intent(this, GameActivity::class.java).also {
-            startActivity(it)
-        }
+//        Intent(this, GameActivity::class.java).also {
+//            startActivity(it)
+//        }
     }
 }
 

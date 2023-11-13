@@ -3,6 +3,7 @@ package com.example.beesang.retrofit
 import com.example.beesang.retrofit.request.UserLoginRequest
 import com.example.beesang.retrofit.request.UserRegisterRequest
 import com.example.beesang.retrofit.response.ChapterReadResponse
+import com.example.beesang.retrofit.response.FarmUserInfoResponse
 import com.example.beesang.retrofit.response.LectureReadResponse
 import com.example.beesang.retrofit.response.QuizReadResponse
 import com.example.beesang.retrofit.response.UserLoginResponse
@@ -10,6 +11,8 @@ import com.example.beesang.retrofit.response.UserRegisterResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -29,4 +32,8 @@ interface BeesangAPI {
 
     @GET("study/quiz/readAll/{chapterId}")
     fun quizReadRequest(@Path(value = "chapterId") chapterId: Int): Call<List<QuizReadResponse>>
+
+    // GAME
+    @GET("api/farm/user")
+    fun gameUserInfoRequest(@Header("Authorization") token: String): Call<FarmUserInfoResponse>
 }

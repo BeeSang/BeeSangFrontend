@@ -36,14 +36,20 @@ import com.google.relay.compose.RelayText
  * Generated code; do not edit directly
  */
 @Composable
-fun GameHeader(modifier: Modifier = Modifier) {
+fun GameHeader(
+    modifier: Modifier = Modifier,
+    username: String,
+    coin: Int,
+    bees: Int,
+    level: Int
+) {
     TopLevel(modifier = modifier) {
         GameHeader(
             modifier = Modifier.boxAlign(
                 alignment = Alignment.TopStart,
                 offset = DpOffset(
                     x = 14.0.dp,
-                    y = 33.0.dp
+                    y = 10.0.dp
                 )
             )
         ) {
@@ -55,7 +61,8 @@ fun GameHeader(modifier: Modifier = Modifier) {
                             x = 22.5.dp,
                             y = 13.0.dp
                         )
-                    )
+                    ),
+                    username = username
                 )
                 GameHeaderUserinfoLevel(
                     modifier = Modifier.boxAlign(
@@ -64,7 +71,8 @@ fun GameHeader(modifier: Modifier = Modifier) {
                             x = 27.0.dp,
                             y = 30.0.dp
                         )
-                    )
+                    ),
+                    level = level
                 )
                 GameHeaderUserinfoBg()
             }
@@ -85,7 +93,8 @@ fun GameHeader(modifier: Modifier = Modifier) {
                             x = 31.0.dp,
                             y = 2.0.dp
                         )
-                    )
+                    ),
+                    bees = bees
                 )
             }
             GameHeaderCoin(
@@ -105,29 +114,30 @@ fun GameHeader(modifier: Modifier = Modifier) {
                             x = 29.0.dp,
                             y = 10.0.dp
                         )
-                    )
+                    ),
+                    coin = coin
                 )
             }
         }
     }
 }
 
-@Preview(widthDp = 375, heightDp = 812)
-@Composable
-private fun GamePreview() {
-    MaterialTheme {
-        RelayContainer {
-            GameHeader(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
-        }
-    }
-}
+//@Preview(widthDp = 375, heightDp = 812)
+//@Composable
+//private fun GamePreview() {
+//    MaterialTheme {
+//        RelayContainer {
+//            GameHeader(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
+//        }
+//    }
+//}
 
 @Composable
-fun GameHeaderUserinfoTitle(modifier: Modifier = Modifier) {
+fun GameHeaderUserinfoTitle(modifier: Modifier = Modifier, username: String) {
     RelayText(
         content = buildAnnotatedString {
             withStyle(style = SpanStyle(fontSize = 12.0.sp)) {
-                append("김건국")
+                append(username)
             }
             withStyle(
                 style = SpanStyle(
@@ -158,9 +168,9 @@ fun GameHeaderUserinfoTitle(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GameHeaderUserinfoLevel(modifier: Modifier = Modifier) {
+fun GameHeaderUserinfoLevel(modifier: Modifier = Modifier, level: Int) {
     RelayText(
-        content = "level 10",
+        content = "level $level",
         fontFamily = notoSansKR,
         color = Color(
             alpha = 255,
@@ -208,9 +218,9 @@ fun GameHeaderBeeBg(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GameHeaderBeeCoin(modifier: Modifier = Modifier) {
+fun GameHeaderBeeCoin(modifier: Modifier = Modifier, bees: Int) {
     RelayText(
-        content = "7",
+        content = "$bees",
         fontSize = 15.0.sp,
         fontFamily = notoSansKR,
         color = Color(
@@ -249,9 +259,9 @@ fun GameHeaderCoinBg(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GameHeaderCoinCoin(modifier: Modifier = Modifier) {
+fun GameHeaderCoinCoin(modifier: Modifier = Modifier, coin: Int) {
     RelayText(
-        content = "1000",
+        content = "$coin",
         fontSize = 15.0.sp,
         fontFamily = notoSansKR,
         color = Color(

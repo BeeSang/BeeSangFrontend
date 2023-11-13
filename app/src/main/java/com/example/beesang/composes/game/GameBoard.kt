@@ -32,18 +32,23 @@ import com.google.relay.compose.RelayText
  * Generated code; do not edit directly
  */
 @Composable
-fun GameBoard(modifier: Modifier = Modifier) {
+fun GameBoard(
+    modifier: Modifier = Modifier,
+    crops: String,
+    bg: Int,
+    onGameBoardTapped: (Int) -> Unit = {},
+) {
     GameBoardTopLevel(modifier = modifier) {
         GameRoom(
             modifier = Modifier.boxAlign(
-                alignment = Alignment.TopStart,
+                alignment = Alignment.TopCenter,
                 offset = DpOffset(
-                    x = 21.0.dp,
+                    x = 0.0.dp,
                     y = 0.0.dp
                 )
             )
         ) {
-            GameRoomBg()
+            GameRoomBg(bg = bg)
             GameRoomBoard(
                 modifier = Modifier.boxAlign(
                     alignment = Alignment.TopStart,
@@ -56,32 +61,33 @@ fun GameBoard(modifier: Modifier = Modifier) {
                 GameRoomBoardBg()
                 GameRoomBoardTitle(
                     modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopStart,
+                        alignment = Alignment.TopCenter,
                         offset = DpOffset(
-                            x = 37.0.dp,
+                            x = 0.0.dp,
                             y = 15.0.dp
                         )
-                    )
+                    ),
+                    crops = crops
                 )
             }
         }
     }
 }
 
-@Preview(widthDp = 375, heightDp = 812)
-@Composable
-private fun GameBoardPreview() {
-    MaterialTheme {
-        RelayContainer {
-            GameBoard(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
-        }
-    }
-}
+//@Preview(widthDp = 375, heightDp = 812)
+//@Composable
+//private fun GameBoardPreview() {
+//    MaterialTheme {
+//        RelayContainer {
+//            GameBoard(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
+//        }
+//    }
+//}
 
 @Composable
-fun GameRoomBg(modifier: Modifier = Modifier) {
+fun GameRoomBg(modifier: Modifier = Modifier, bg: Int) {
     RelayImage(
-        image = painterResource(R.drawable.game2_game_room_bg),
+        image = painterResource(bg),
         contentScale = ContentScale.Crop,
         modifier = modifier.requiredWidth(333.0.dp).requiredHeight(235.0.dp)
     )
@@ -97,9 +103,9 @@ fun GameRoomBoardBg(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GameRoomBoardTitle(modifier: Modifier = Modifier) {
+fun GameRoomBoardTitle(modifier: Modifier = Modifier, crops: String) {
     RelayText(
-        content = "방울토마토 농장",
+        content = "$crops 농장",
         fontSize = 6.0.sp,
         fontFamily = notoSansKR,
         color = Color(
@@ -150,6 +156,6 @@ fun GameBoardTopLevel(
         content = content,
         modifier = modifier
             .fillMaxWidth(1.0f)
-            .requiredHeight(235.0.dp)
+            .requiredHeight(220.0.dp)
     )
 }
