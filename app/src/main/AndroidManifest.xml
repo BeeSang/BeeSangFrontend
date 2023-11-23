@@ -71,11 +71,18 @@
             android:exported="false">
         </activity>
 
-        <!-- MyPage Activity -->
+        <!-- Game Board Activity -->
         <activity
-            android:name=".activities.MyPageActivity"
+            android:name=".activities.InGameActivity"
             android:exported="false">
         </activity>
+
+        <!-- MyPage Activity -->
+        <activity
+        android:name=".activities.MyPageActivity"
+        android:exported="false">
+        </activity>
+
 
     </application>
 

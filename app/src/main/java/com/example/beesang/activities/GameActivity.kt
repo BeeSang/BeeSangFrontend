@@ -9,7 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.beesang.composes.game.GameHome
-import com.example.beesang.composes.home.HomeCompose
 import com.example.beesang.ui.theme.BeeSangTheme
 
 class GameActivity : ComponentActivity() {
@@ -23,7 +22,7 @@ class GameActivity : ComponentActivity() {
                 ) {
                     GameHome(
                         applicationContext = applicationContext,
-                        onGameBoardTapped = { a -> gameBoardTapped(a) },
+                        onGameBoardTapped = { bg -> gameBoardTapped(bg) },
                         onCommunityBtnTapped = { onCommunityBtnTapped() },
                         onHomeBtnTapped = { onHomeBtnTapped() }
                     )
@@ -32,10 +31,9 @@ class GameActivity : ComponentActivity() {
         }
     }
 
-    private fun gameBoardTapped(a: Int) {
-        //LectureActivity 참고
-        val intent = Intent(this, ChapterActivity::class.java)
-        intent.putExtra("a", a)
+    private fun gameBoardTapped(bg: Int) {
+        val intent = Intent(this, InGameActivity::class.java)
+        intent.putExtra("bg", bg)
         startActivity(intent)
     }
 

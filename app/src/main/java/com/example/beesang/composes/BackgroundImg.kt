@@ -20,3 +20,17 @@ fun BackgroundImg(modifier: Modifier = Modifier) {
             .requiredHeight(932.0.dp)
     )
 }
+
+@Composable
+fun FarmBackground(
+    modifier: Modifier = Modifier,
+    bg: Int
+) {
+    RelayImage(
+        image = painterResource(bg),
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .requiredWidth(430.0.dp)
+            .requiredHeight(927.0.dp)
+    )
+}

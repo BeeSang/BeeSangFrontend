@@ -24,6 +24,7 @@ import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
 import com.google.relay.compose.RelayText
+import com.google.relay.compose.tappable
 
 /**
  * Game Screen2 V2
@@ -40,11 +41,13 @@ fun GameBoard(
 ) {
     GameBoardTopLevel(modifier = modifier) {
         GameRoom(
-            modifier = Modifier.boxAlign(
-                alignment = Alignment.TopCenter,
-                offset = DpOffset(
-                    x = 0.0.dp,
-                    y = 0.0.dp
+            modifier = Modifier
+                .tappable(onTap = { onGameBoardTapped(bg) })
+                .boxAlign(
+                    alignment = Alignment.TopCenter,
+                    offset = DpOffset(
+                        x = 0.0.dp,
+                        y = 0.0.dp
                 )
             )
         ) {

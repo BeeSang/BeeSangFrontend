@@ -28,6 +28,7 @@ import com.example.beesang.composes.lecture.getChapterData
 import com.example.beesang.register.Register
 import com.example.beesang.retrofit.ApiObject
 import com.example.beesang.retrofit.TokenStorage
+import com.example.beesang.retrofit.getUserInfo
 import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
 import com.google.relay.compose.ColumnScopeInstance.boxAlign
@@ -88,24 +89,6 @@ fun GameHome(
             }
         }
     }
-}
-
-suspend fun getUserInfo(applicationContext: Context): FarmUserInfoResponse = suspendCoroutine {
-    val token = TokenStorage.getToken(applicationContext)
-    val call = ApiObject.getRetrofitService.gameUserInfoRequest("Bearer $token")
-    call.enqueue(object : Callback<FarmUserInfoResponse> {
-        override fun onResponse(call: Call<FarmUserInfoResponse>, response: Response<FarmUserInfoResponse>) {
-            if(response.isSuccessful) {
-                val responseBody = response.body()!!
-                it.resume(responseBody)
-            } else {
-//                it.resume()
-            }
-        }
-        override fun onFailure(call: Call<FarmUserInfoResponse>, t: Throwable) {
-            Log.e("Error", t.toString())
-        }
-    })
 }
 
 fun onBackBtnTapped() {
