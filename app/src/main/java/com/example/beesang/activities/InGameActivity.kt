@@ -23,22 +23,28 @@ class InGameActivity : ComponentActivity() {
                 ) {
                     val bg = intent.getIntExtra("bg", 0)
                     var inGameBg = 0
+                    var farmType = ""
                     if(bg == R.drawable.game2_game_room_bg) {
                         inGameBg = R.drawable.ingame_tomato_tomato_bg
+                        farmType = "TOMATO"
                     }
                     if(bg == R.drawable.game2_game_room_bg2) {
                         inGameBg = R.drawable.ingame_mango_mango_bg
+                        farmType = "MANGO"
                     }
                     if(bg == R.drawable.game2_game_room_bg3) {
                         inGameBg = R.drawable.ingame_lettuce_lettuce_bg
+                        farmType = "LETTUCE"
                     }
                     if(bg == R.drawable.game2_game_room_bg4) {
                         inGameBg = R.drawable.ingame_sweet_potato_sweet_potato_bg
+                        farmType = "SWEET_POTATO"
                     }
 
                     InGameCompose(
                         applicationContext = applicationContext,
-                        bg = inGameBg
+                        bg = inGameBg,
+                        farmType = farmType
                     )
                 }
             }

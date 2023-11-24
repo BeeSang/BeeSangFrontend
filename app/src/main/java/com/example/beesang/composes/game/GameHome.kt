@@ -31,6 +31,7 @@ import com.example.beesang.retrofit.TokenStorage
 import com.example.beesang.retrofit.getUserInfo
 import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
+import com.google.relay.compose.BoxScopeInstanceImpl.align
 import com.google.relay.compose.ColumnScopeInstance.boxAlign
 import com.google.relay.compose.RelayContainer
 import kotlinx.coroutines.CoroutineScope
@@ -75,8 +76,8 @@ fun GameHome(
                         .verticalScroll(rememberScrollState())
                 ) {
                     GameBoard(crops = "방울토마토", bg = R.drawable.game2_game_room_bg, onGameBoardTapped = onGameBoardTapped)
-                    GameBoard(crops = "망고", bg = R.drawable.game2_game_room_bg2, onGameBoardTapped = onGameBoardTapped)
-                    GameBoard(crops = "상추", bg = R.drawable.game2_game_room_bg3, onGameBoardTapped = onGameBoardTapped)
+//                    GameBoard(crops = "망고", bg = R.drawable.game2_game_room_bg2, onGameBoardTapped = onGameBoardTapped)
+//                    GameBoard(crops = "상추", bg = R.drawable.game2_game_room_bg3, onGameBoardTapped = onGameBoardTapped)
                     GameBoard(crops = "고구마", bg = R.drawable.game2_game_room_bg4, onGameBoardTapped = onGameBoardTapped)
                 }
                 GameBottomBar(
@@ -87,6 +88,13 @@ fun GameHome(
                     onHomeBtnTapped = { onHomeBtnTapped() }
                 )
             }
+//            GameBottomBar(
+//                modifier = Modifier
+//                    .align(Alignment.BottomCenter)
+//                    .padding(bottom = 20.dp),
+//                onCommunityBtnTapped = { onCommunityBtnTapped() },
+//                onHomeBtnTapped = { onHomeBtnTapped() }
+//            )
         }
     }
 }

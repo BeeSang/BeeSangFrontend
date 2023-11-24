@@ -1,5 +1,6 @@
 package com.example.beesang.composes
 
+import android.graphics.Point
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable

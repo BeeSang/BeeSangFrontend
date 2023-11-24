@@ -1,8 +1,10 @@
 package com.example.beesang.retrofit
 
+import com.example.beesang.retrofit.request.FarmUpdateRequest
 import com.example.beesang.retrofit.request.UserLoginRequest
 import com.example.beesang.retrofit.request.UserRegisterRequest
 import com.example.beesang.retrofit.response.ChapterReadResponse
+import com.example.beesang.retrofit.response.FarmReadResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
 import com.example.beesang.retrofit.response.LectureReadResponse
 import com.example.beesang.retrofit.response.QuizReadResponse
@@ -15,6 +17,7 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface BeesangAPI {
 
@@ -36,4 +39,13 @@ interface BeesangAPI {
     // GAME
     @GET("api/farm/user")
     fun gameUserInfoRequest(@Header("Authorization") token: String): Call<FarmUserInfoResponse>
+
+    @GET("api/farm/read")
+    fun farmReadRequest(@Query("farmType") farmType: String, @Header("Authorization") token: String): Call<FarmReadResponse>
+
+    @POST("api/farm/grow/{farmId}")
+    fun farmGrowRequest(@Path(value = "farmId") farmId: Int, @Body jsonParams: FarmUpdateRequest, @Header("Authorization") token: String): Call<Unit>
+
+    @POST("api/farm/harvest/{farmId}")
+    fun farmHarvestRequest(@Path(value = "farmId") farmId: Int, @Body jsonParams: FarmUpdateRequest, @Header("Authorization") token: String): Call<Unit>
 }
