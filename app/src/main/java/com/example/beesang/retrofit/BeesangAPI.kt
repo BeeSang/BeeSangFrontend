@@ -4,20 +4,25 @@ import com.example.beesang.retrofit.request.FarmHarvestRequest
 import com.example.beesang.retrofit.request.FarmUpdateRequest
 import com.example.beesang.retrofit.request.UserLoginRequest
 import com.example.beesang.retrofit.request.UserRegisterRequest
+import com.example.beesang.retrofit.response.AssignmentReadAllResponse
 import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.example.beesang.retrofit.response.FarmReadResponse
 import com.example.beesang.retrofit.response.FarmUpdateResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
 import com.example.beesang.retrofit.response.LectureReadResponse
+import com.example.beesang.retrofit.response.MyAssignmentReadResponse
 import com.example.beesang.retrofit.response.QuizReadResponse
 import com.example.beesang.retrofit.response.UserLoginResponse
 import com.example.beesang.retrofit.response.UserRegisterResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -50,4 +55,14 @@ interface BeesangAPI {
 
     @POST("api/farm/harvest/{farmId}")
     fun farmHarvestRequest(@Path(value = "farmId") farmId: Long, @Body jsonParams: FarmHarvestRequest, @Header("Authorization") token: String): Call<FarmUpdateResponse>
+
+    @GET("assignment/readAll")
+    fun assignmentReadAllRequest(): Call<List<AssignmentReadAllResponse>>
+
+    @Multipart
+    @POST("assignment/upload/{assignmentId}")
+    fun uploadAssignmentImage(@Header("Authorization") token: String, @Path(value = "assignmentId") assignmentId: Long, @Part file: MultipartBody.Part): Call<Unit>
+
+    @GET("assignment/readMyAssignment/{assignmentId}")
+    fun myAssignmentReadRequest(@Path(value = "assignmentId") assignmentId: Long, @Header("Authorization") token: String): Call<MyAssignmentReadResponse>
 }

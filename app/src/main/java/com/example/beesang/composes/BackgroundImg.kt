@@ -8,6 +8,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.beesang.R
+import com.example.beesang.activities.InAssignmentActivity
 import com.google.relay.compose.RelayImage
 
 @Composable
@@ -28,6 +29,17 @@ fun FarmBackground(
 ) {
     RelayImage(
         image = painterResource(bg),
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .requiredWidth(430.0.dp)
+            .requiredHeight(927.0.dp)
+    )
+}
+
+@Composable
+fun InAssignmentBackground(modifier: Modifier = Modifier) {
+    RelayImage(
+        image = painterResource(R.drawable.inassignment_bg),
         contentScale = ContentScale.Crop,
         modifier = modifier
             .requiredWidth(430.0.dp)

@@ -62,6 +62,5 @@ class InGameActivity : ComponentActivity() {
         val intent = intent
         startActivity(intent)
         overridePendingTransition(0, 0)
-
     }
 }

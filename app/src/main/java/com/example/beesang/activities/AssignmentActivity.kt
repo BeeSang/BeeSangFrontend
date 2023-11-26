@@ -22,21 +22,27 @@ class AssignmentActivity : ComponentActivity() {
                 ) {
                     AssignmentCompose(
                         onBackBtnTapped = { onBackBtnTapped() },
-                        onHomeBtnTapped = { onHomeBtnTapped() }
+                        onHomeBtnTapped = { onHomeBtnTapped() },
+                        onCardAssignmentTapped = { id, week, title, description -> onCardAssignmentTapped(id, week, title, description) }
                     )
                 }
             }
         }
     }
 
+    private fun onCardAssignmentTapped(id: Long, week: Int, title: String, description: String) {
+        val intent = Intent(this, InAssignmentActivity::class.java)
+        intent.putExtra("id", id.toInt())
+        intent.putExtra("week", week)
+        intent.putExtra("title", title)
+        intent.putExtra("description", description)
+        startActivity(intent)
+    }
+
     private fun onBackBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
-            startActivity(this)
-        }
+        finish()
     }
     private fun onHomeBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
-            startActivity(this)
-        }
+        finish()
     }
 }

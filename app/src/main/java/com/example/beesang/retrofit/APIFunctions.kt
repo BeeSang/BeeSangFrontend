@@ -4,9 +4,12 @@ import android.content.Context
 import android.util.Log
 import com.example.beesang.retrofit.request.FarmHarvestRequest
 import com.example.beesang.retrofit.request.FarmUpdateRequest
+import com.example.beesang.retrofit.response.AssignmentReadAllResponse
 import com.example.beesang.retrofit.response.FarmReadResponse
 import com.example.beesang.retrofit.response.FarmUpdateResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
+import com.example.beesang.retrofit.response.MyAssignmentReadResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -82,6 +85,60 @@ suspend fun harvestCrops(applicationContext: Context, crops1: Int, crops2: Int, 
             }
         }
         override fun onFailure(call: Call<FarmUpdateResponse>, t: Throwable) {
+            Log.e("Error", t.toString())
+        }
+    })
+}
+
+suspend fun getAssignments(): List<AssignmentReadAllResponse> = suspendCoroutine {
+    val call = ApiObject.getRetrofitService.assignmentReadAllRequest()
+    call.enqueue(object : Callback<List<AssignmentReadAllResponse>> {
+        override fun onResponse(call: Call<List<AssignmentReadAllResponse>>, response: Response<List<AssignmentReadAllResponse>>) {
+            if (response.isSuccessful) {
+                val responseBody = response.body()!!
+                it.resume(responseBody)
+            } else {
+//                it.resume()
+            }
+        }
+
+        override fun onFailure(call: Call<List<AssignmentReadAllResponse>>, t: Throwable) {
+            Log.e("Error", t.toString())
+        }
+    })
+}
+
+suspend fun uploadAssignmentImage(applicationContext: Context, body: MultipartBody.Part, assignmentId: Long) = suspendCoroutine {
+    val token = TokenStorage.getToken(applicationContext)
+    val call = ApiObject.getRetrofitService.uploadAssignmentImage("Bearer $token", assignmentId, body)
+    call.enqueue(object : Callback<Unit> {
+        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+            if(response.isSuccessful) {
+                val responseBody = response.body()!!
+                it.resume(responseBody)
+            } else {
+//                it.resume()
+            }
+        }
+        override fun onFailure(call: Call<Unit>, t: Throwable) {
+            Log.e("Error", t.toString())
+        }
+    })
+}
+
+suspend fun myAssignmentRead(applicationContext: Context, assignmentId: Long): MyAssignmentReadResponse = suspendCoroutine {
+    val token = TokenStorage.getToken(applicationContext)
+    val call = ApiObject.getRetrofitService.myAssignmentReadRequest(assignmentId, "Bearer $token")
+    call.enqueue(object : Callback<MyAssignmentReadResponse> {
+        override fun onResponse(call: Call<MyAssignmentReadResponse>, response: Response<MyAssignmentReadResponse>) {
+            if(response.isSuccessful) {
+                val responseBody = response.body()!!
+                it.resume(responseBody)
+            } else {
+//                it.resume()
+            }
+        }
+        override fun onFailure(call: Call<MyAssignmentReadResponse>, t: Throwable) {
             Log.e("Error", t.toString())
         }
     })

@@ -1,12 +1,11 @@
 package com.example.beesang.composes.assignment
 
-import com.example.beesang.assignmenthomeboard.notoSansKR
+import com.example.beesang.inassignmentindexbar.notoSansKR
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,25 +25,20 @@ import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
 import com.google.relay.compose.RelayText
-import com.google.relay.compose.tappable
 
 /**
- * assignment home board V1
+ * inassignment_indexbar V1
  *
- * This composable was generated from the UI Package 'assignment_home_board'.
+ * This composable was generated from the UI Package 'inassignment_indexbar'.
  * Generated code; do not edit directly
  */
 @Composable
-fun AssignmentWeekCard(
+fun InAssignmentIndexBar(
     modifier: Modifier = Modifier,
-    id: Long,
-    week: Int,
-    title: String,
-    description: String,
-    onCardAssignmentTapped: (Long, Int, String, String) -> Unit,
+    title: String
 ) {
-    AssignmentWeekCardTopLevel(modifier = modifier) {
-        AssignmentHomeBoardBoard(
+    InAssignmentIndexBarTopLevel(modifier = modifier) {
+        InassignmentIndexbarIndexbar(
             modifier = Modifier.boxAlign(
                 alignment = Alignment.TopCenter,
                 offset = DpOffset(
@@ -52,86 +46,66 @@ fun AssignmentWeekCard(
                     y = 0.0.dp
                 )
             )
-                .tappable(onTap = { onCardAssignmentTapped(id, week, title, description) })
         ) {
-            AssignmentHomeBoardBoardBg()
-            AssignmentHomeBoardBoardContent(
+            InassignmentIndexbarIndexbarBg()
+            InassignmentIndexbarIndexbarTitle(
                 modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
+                    alignment = Alignment.TopCenter,
                     offset = DpOffset(
-                        x = 37.0.dp,
-                        y = 43.0.dp
+                        x = -32.0.dp,
+                        y = 6.0.dp
                     )
                 ),
                 title = title
             )
-            AssignmentHomeBoardBoardTitle(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 37.0.dp,
-                        y = 28.0.dp
-                    )
-                ),
-                week = week
+        }
+    }
+}
+
+@Preview(widthDp = 430, heightDp = 932)
+@Composable
+private fun InAssignmentIndexBarPreview() {
+    MaterialTheme {
+        RelayContainer {
+            InAssignmentIndexBar(
+                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f),
+                title = "참여 방법"
             )
         }
     }
 }
 
 @Composable
-fun AssignmentHomeBoardBoardBg(modifier: Modifier = Modifier) {
+fun InassignmentIndexbarIndexbarBg(modifier: Modifier = Modifier) {
     RelayImage(
-        image = painterResource(R.drawable.assignment_home_board_assignment_home_board_board_bg),
+        image = painterResource(R.drawable.inassignment_indexbar_inassignment_indexbar_indexbar_bg),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(350.0.dp).requiredHeight(116.0.dp)
+        modifier = modifier.requiredWidth(359.0.dp).requiredHeight(39.0.dp)
     )
 }
 
 @Composable
-fun AssignmentHomeBoardBoardContent(modifier: Modifier = Modifier, title: String) {
+fun InassignmentIndexbarIndexbarTitle(modifier: Modifier = Modifier, title: String) {
     RelayText(
         content = title,
         fontSize = 20.0.sp,
         fontFamily = notoSansKR,
         color = Color(
             alpha = 255,
-            red = 83,
-            green = 38,
+            red = 109,
+            green = 84,
             blue = 0
         ),
         height = 1.4479999542236328.em,
         textAlign = TextAlign.Left,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(264.0.dp).requiredHeight(44.0.dp).wrapContentHeight(
-            align = Alignment.CenterVertically,
-            unbounded = true
-        )
+        modifier = modifier.requiredWidth(285.0.dp).requiredHeight(28.0.dp)
     )
 }
 
 @Composable
-fun AssignmentHomeBoardBoardTitle(modifier: Modifier = Modifier, week: Int) {
-    RelayText(
-        content = week.toString() + "주차",
-        fontSize = 15.0.sp,
-        fontFamily = notoSansKR,
-        color = Color(
-            alpha = 255,
-            red = 162,
-            green = 160,
-            blue = 156
-        ),
-        height = 1.4479999542236328.em,
-        textAlign = TextAlign.Left,
-        fontWeight = FontWeight(700.0.toInt()),
-        modifier = modifier
-    )
-}
-
-@Composable
-fun AssignmentHomeBoardBoard(
+fun InassignmentIndexbarIndexbar(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -139,12 +113,12 @@ fun AssignmentHomeBoardBoard(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(350.0.dp).requiredHeight(116.0.dp)
+        modifier = modifier.requiredWidth(359.0.dp).requiredHeight(39.0.dp)
     )
 }
 
 @Composable
-fun AssignmentWeekCardTopLevel(
+fun InAssignmentIndexBarTopLevel(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -153,6 +127,6 @@ fun AssignmentWeekCardTopLevel(
         content = content,
         modifier = modifier
             .fillMaxWidth(1.0f)
-            .requiredHeight(100.dp)
+            .requiredHeight(40.dp)
     )
 }

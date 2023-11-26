@@ -59,6 +59,12 @@
             android:exported="false">
         </activity>
 
+        <!-- InAssignment Activity -->
+        <activity
+            android:name=".activities.InAssignmentActivity"
+            android:exported="false">
+        </activity>
+
         <!-- Chapter Activity -->
         <activity
             android:name=".activities.ChapterActivity"

@@ -80,4 +80,6 @@ dependencies {
     implementation ("com.google.android.exoplayer:exoplayer-core:2.X.X")
     implementation ("com.google.android.exoplayer:exoplayer-dash:2.X.X")
     implementation ("com.google.android.exoplayer:exoplayer-ui:2.X.X")
+
+    implementation ("io.coil-kt:coil-compose:1.3.2")
 }
