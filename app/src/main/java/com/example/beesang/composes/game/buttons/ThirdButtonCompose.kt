@@ -1,6 +1,5 @@
 package com.example.beesang.composes.game.buttons
 
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
@@ -8,7 +7,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,9 +16,14 @@ import com.example.beesang.R
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
+import com.google.relay.compose.tappable
 
 @Composable
-fun ThirdButtonCompose(modifier: Modifier = Modifier) {
+fun ThirdButtonCompose(
+    modifier: Modifier = Modifier,
+    onNoBtnTapped: () -> Unit = {},
+    onOkBtnTapped: () -> Unit = {}
+) {
     ThirdButtonTopLevel(modifier = modifier) {
         IngameButtons3Btns(
             modifier = Modifier.boxAlign(
@@ -39,6 +42,7 @@ fun ThirdButtonCompose(modifier: Modifier = Modifier) {
                         y = 110.0.dp
                     )
                 )
+                    .tappable(onTap = onNoBtnTapped)
             )
             IngameButtons3Ok(
                 modifier = Modifier.boxAlign(
@@ -48,6 +52,7 @@ fun ThirdButtonCompose(modifier: Modifier = Modifier) {
                         y = 110.0.dp
                     )
                 )
+                    .tappable(onTap = onOkBtnTapped)
             )
             IngameButtons3Title()
         }

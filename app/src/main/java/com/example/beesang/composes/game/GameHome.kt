@@ -56,7 +56,8 @@ fun GameHome(
         BackgroundImg()
         Column(
             modifier = modifier
-                .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                .align(Alignment.TopCenter)
+                .padding(top = 16.dp, start = 0.dp, end = 16.dp)
         ) {
             val scope = CoroutineScope(Dispatchers.IO)
             val result = remember { mutableStateOf<FarmUserInfoResponse?>(null) }
@@ -70,15 +71,19 @@ fun GameHome(
                     level = it.level
                 )
             }
-            Box {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(start = 16.dp)
+            ) {
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
                 ) {
                     GameBoard(crops = "방울토마토", bg = R.drawable.game2_game_room_bg, onGameBoardTapped = onGameBoardTapped)
-//                    GameBoard(crops = "망고", bg = R.drawable.game2_game_room_bg2, onGameBoardTapped = onGameBoardTapped)
-//                    GameBoard(crops = "상추", bg = R.drawable.game2_game_room_bg3, onGameBoardTapped = onGameBoardTapped)
                     GameBoard(crops = "고구마", bg = R.drawable.game2_game_room_bg4, onGameBoardTapped = onGameBoardTapped)
+                    GameBoard(crops = "망고", bg = R.drawable.game2_game_room_bg2/*, onGameBoardTapped = onGameBoardTapped*/)
+                    GameBoard(crops = "상추", bg = R.drawable.game2_game_room_bg3/*, onGameBoardTapped = onGameBoardTapped*/)
                 }
                 GameBottomBar(
                     modifier = Modifier
@@ -88,17 +93,6 @@ fun GameHome(
                     onHomeBtnTapped = { onHomeBtnTapped() }
                 )
             }
-//            GameBottomBar(
-//                modifier = Modifier
-//                    .align(Alignment.BottomCenter)
-//                    .padding(bottom = 20.dp),
-//                onCommunityBtnTapped = { onCommunityBtnTapped() },
-//                onHomeBtnTapped = { onHomeBtnTapped() }
-//            )
         }
     }
-}
-
-fun onBackBtnTapped() {
-
 }

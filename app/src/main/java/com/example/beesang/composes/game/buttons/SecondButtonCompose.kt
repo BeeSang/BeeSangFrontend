@@ -16,9 +16,14 @@ import com.example.beesang.R
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
+import com.google.relay.compose.tappable
 
 @Composable
-fun SecondButtonCompose(modifier: Modifier = Modifier) {
+fun SecondButtonCompose(
+    modifier: Modifier = Modifier,
+    onNoBtnTapped: () -> Unit = {},
+    onOkBtnTapped: () -> Unit = {}
+) {
     SecondButtonTopLevel(modifier = modifier) {
         IngameButtons2Btns(
             modifier = Modifier.boxAlign(
@@ -37,6 +42,7 @@ fun SecondButtonCompose(modifier: Modifier = Modifier) {
                         y = 110.0.dp
                     )
                 )
+                    .tappable(onTap = onNoBtnTapped)
             )
             IngameButtons2Ok(
                 modifier = Modifier.boxAlign(
@@ -46,6 +52,7 @@ fun SecondButtonCompose(modifier: Modifier = Modifier) {
                         y = 110.0.dp
                     )
                 )
+                    .tappable(onTap = onOkBtnTapped)
             )
             IngameButtons2Title()
         }

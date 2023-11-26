@@ -1,6 +1,5 @@
 package com.example.beesang.composes.game.buttons
 
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
@@ -8,7 +7,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,11 +16,16 @@ import com.example.beesang.R
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
+import com.google.relay.compose.tappable
 
 
 @Composable
-fun MainButtonCompose(modifier: Modifier = Modifier) {
-    MainButtonTopLevel(modifier = modifier) {
+fun MainButtonCompose(
+    modifier: Modifier = Modifier,
+    onGrowBtnTapped: () -> Unit = {},
+    onHarvestBtnTapped: () -> Unit = {},
+) {
+    MainButtonTopLevel(modifier = modifier,) {
         IngameButtons1Btns(
             modifier = Modifier.boxAlign(
                 alignment = Alignment.TopCenter,
@@ -32,7 +35,10 @@ fun MainButtonCompose(modifier: Modifier = Modifier) {
                 )
             )
         ) {
-            GrowBtn()
+            GrowBtn(
+                modifier = Modifier
+                    .tappable(onTap = onGrowBtnTapped)
+            )
             HarvestBtn(
                 modifier = Modifier.boxAlign(
                     alignment = Alignment.TopStart,
@@ -41,6 +47,7 @@ fun MainButtonCompose(modifier: Modifier = Modifier) {
                         y = 0.0.dp
                     )
                 )
+                    .tappable(onTap = onHarvestBtnTapped)
             )
         }
     }
@@ -51,7 +58,9 @@ fun MainButtonCompose(modifier: Modifier = Modifier) {
 private fun IngameButtons1Preview() {
     MaterialTheme {
         RelayContainer {
-            MainButtonCompose(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
+            MainButtonCompose(
+                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
+            )
         }
     }
 }

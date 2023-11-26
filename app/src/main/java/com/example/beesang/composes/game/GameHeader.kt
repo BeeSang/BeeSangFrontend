@@ -1,14 +1,10 @@
 package com.example.beesang.composes.game
 
-import android.content.Context
-import android.util.Log
 import com.example.beesang.game.notoSansKR
 
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,24 +16,15 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.beesang.R
-import com.example.beesang.retrofit.ApiObject
-import com.example.beesang.retrofit.TokenStorage
-import com.example.beesang.retrofit.response.FarmUserInfoResponse
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
 import com.google.relay.compose.RelayText
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * Game Home Screen V1
@@ -56,7 +43,7 @@ fun GameHeader(
     TopLevel(modifier = modifier) {
         GameHeader(
             modifier = Modifier.boxAlign(
-                alignment = Alignment.TopStart,
+                alignment = Alignment.TopCenter,
                 offset = DpOffset(
                     x = 14.0.dp,
                     y = 10.0.dp
@@ -68,7 +55,7 @@ fun GameHeader(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopCenter,
                         offset = DpOffset(
-                            x = 22.5.dp,
+                            x = 12.0.dp,
                             y = 13.0.dp
                         )
                     ),

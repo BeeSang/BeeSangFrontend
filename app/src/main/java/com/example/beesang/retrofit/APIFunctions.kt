@@ -2,8 +2,10 @@ package com.example.beesang.retrofit
 
 import android.content.Context
 import android.util.Log
+import com.example.beesang.retrofit.request.FarmHarvestRequest
 import com.example.beesang.retrofit.request.FarmUpdateRequest
 import com.example.beesang.retrofit.response.FarmReadResponse
+import com.example.beesang.retrofit.response.FarmUpdateResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,12 +49,12 @@ suspend fun readFarm(applicationContext: Context, farmType: String): FarmReadRes
     })
 }
 
-suspend fun growCrops(applicationContext: Context, crops1: Int, crops2: Int, crops3: Int,farmId: Int): Unit = suspendCoroutine {
+suspend fun growCrops(applicationContext: Context, crops1: Int, crops2: Int, crops3: Int, farmId: Long): FarmUpdateResponse = suspendCoroutine {
     val token = TokenStorage.getToken(applicationContext)
     val data = FarmUpdateRequest(crops1, crops2, crops3)
     val call = ApiObject.getRetrofitService.farmGrowRequest(farmId, data, "Bearer $token")
-    call.enqueue(object : Callback<Unit> {
-        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+    call.enqueue(object : Callback<FarmUpdateResponse> {
+        override fun onResponse(call: Call<FarmUpdateResponse>, response: Response<FarmUpdateResponse>) {
             if(response.isSuccessful) {
                 val responseBody = response.body()!!
                 it.resume(responseBody)
@@ -60,18 +62,18 @@ suspend fun growCrops(applicationContext: Context, crops1: Int, crops2: Int, cro
 //                it.resume()
             }
         }
-        override fun onFailure(call: Call<Unit>, t: Throwable) {
+        override fun onFailure(call: Call<FarmUpdateResponse>, t: Throwable) {
             Log.e("Error", t.toString())
         }
     })
 }
 
-suspend fun harvestCrops(applicationContext: Context, crops1: Int, crops2: Int, crops3: Int,farmId: Int): Unit = suspendCoroutine {
+suspend fun harvestCrops(applicationContext: Context, crops1: Int, crops2: Int, crops3: Int, harvestCount:Int, farmId: Long): FarmUpdateResponse = suspendCoroutine {
     val token = TokenStorage.getToken(applicationContext)
-    val data = FarmUpdateRequest(crops1, crops2, crops3)
+    val data = FarmHarvestRequest(crops1, crops2, crops3, harvestCount)
     val call = ApiObject.getRetrofitService.farmHarvestRequest(farmId, data, "Bearer $token")
-    call.enqueue(object : Callback<Unit> {
-        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+    call.enqueue(object : Callback<FarmUpdateResponse> {
+        override fun onResponse(call: Call<FarmUpdateResponse>, response: Response<FarmUpdateResponse>) {
             if(response.isSuccessful) {
                 val responseBody = response.body()!!
                 it.resume(responseBody)
@@ -79,7 +81,7 @@ suspend fun harvestCrops(applicationContext: Context, crops1: Int, crops2: Int, 
 //                it.resume()
             }
         }
-        override fun onFailure(call: Call<Unit>, t: Throwable) {
+        override fun onFailure(call: Call<FarmUpdateResponse>, t: Throwable) {
             Log.e("Error", t.toString())
         }
     })

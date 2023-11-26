@@ -33,14 +33,10 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beesang.R
-import com.example.beesang.composes.welcome.Button
-import com.example.beesang.composes.welcome.WelcomeCompose
 import com.example.beesang.login.notoSansKR
 import com.google.relay.compose.BoxScopeInstance.boxAlign
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayImage
-import com.google.relay.compose.RelayText
-import com.google.relay.compose.tappable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

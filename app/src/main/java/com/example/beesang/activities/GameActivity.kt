@@ -38,14 +38,12 @@ class GameActivity : ComponentActivity() {
     }
 
     private fun onCommunityBtnTapped() {
-        Intent(this, GameActivity::class.java).apply {
-            startActivity(this)
-        }
+//        Intent(this, GameActivity::class.java).apply {
+//            startActivity(this)
+//        }
     }
 
     private fun onHomeBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
-            startActivity(this)
-        }
+        finish()
     }
 }

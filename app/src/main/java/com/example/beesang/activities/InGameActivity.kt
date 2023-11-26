@@ -1,7 +1,6 @@
 package com.example.beesang.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +10,7 @@ import androidx.compose.ui.Modifier
 import com.example.beesang.R
 import com.example.beesang.composes.game.InGameCompose
 import com.example.beesang.ui.theme.BeeSangTheme
+
 
 class InGameActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +44,24 @@ class InGameActivity : ComponentActivity() {
                     InGameCompose(
                         applicationContext = applicationContext,
                         bg = inGameBg,
-                        farmType = farmType
+                        farmType = farmType,
+                        onBackButtonTapped = { onBackButtonTapped() },
+                        refreshActivity = { refreshActivity() }
                     )
                 }
             }
         }
+    }
+
+    private fun onBackButtonTapped() {
+        finish()
+    }
+    private fun refreshActivity() {
+        finish()
+        overridePendingTransition(0, 0)
+        val intent = intent
+        startActivity(intent)
+        overridePendingTransition(0, 0)
+
     }
 }
