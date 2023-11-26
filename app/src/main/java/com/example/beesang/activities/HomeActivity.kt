@@ -24,8 +24,8 @@ class HomeActivity : ComponentActivity() {
                         onLectureBtnTapped= { onLectureBtnTapped() },
                         onGameBtnTapped = { onGameBtnTapped() },
                         onAssignBtnTapped = { onAssignBtnTapped() },
-                        onMypageBtnTapped = { onMyPageBtnTapped() },
-                        onLogoutBtnTapped = {}
+                        onMyPageBtnTapped = { onMyPageBtnTapped() },
+                        onLogoutBtnTapped = { logoutBtnTapped() }
                     )
                 }
             }
@@ -54,5 +54,9 @@ class HomeActivity : ComponentActivity() {
         Intent(this, MyPageActivity::class.java).apply {
             startActivity(this)
         }
+    }
+
+    private fun logoutBtnTapped() {
+        finish()
     }
 }

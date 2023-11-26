@@ -1,7 +1,10 @@
 package com.example.beesang.composes.home
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -21,6 +24,7 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.beesang.R
 import com.example.beesang.login.notoSansKR
+import com.google.relay.compose.BoxScopeInstanceImpl.align
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
@@ -38,7 +42,7 @@ import com.google.relay.compose.tappable
  * @param onLectureBtnTapped on lecture_btn tapped
  * @param onGameBtnTapped on game_btn tapped
  * @param onAssignBtnTapped on assign_btn tapped
- * @param onMypageBtnTapped on mypage_btn tapped
+ * @param onMyPageBtnTapped on mypage_btn tapped
  * @param onLogoutBtnTapped on logout_btn tapped
  */
 @Composable
@@ -46,178 +50,29 @@ fun HomeCompose(
     onLectureBtnTapped: () -> Unit = {},
     onGameBtnTapped: () -> Unit = {},
     onAssignBtnTapped: () -> Unit = {},
-    onMypageBtnTapped: () -> Unit = {},
+    onMyPageBtnTapped: () -> Unit = {},
     onLogoutBtnTapped: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     TopLevel(modifier = modifier) {
         BackgroundImg()
-        TodayAssignInfo(
-            modifier = Modifier.boxAlign(
-                alignment = Alignment.TopStart,
-                offset = DpOffset(
-                    x = 61.0.dp,
-                    y = 239.0.dp
-                )
+        Column {
+            HomeBoard( //190dp
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .offset(y = 200.dp)
             )
-        ) {
-            TodayAssignRectanble(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = -10.0.dp,
-                        y = -6.0.dp
-                    )
-                )
-            )
-            TotayAssignDescription(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 19.0.dp,
-                        y = 92.0.dp
-                    )
-                )
-            )
-            TotayAssignTitle(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 19.0.dp,
-                        y = 54.0.dp
-                    )
-                )
-            )
-            InfoTitle(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 22.0.dp,
-                        y = 21.0.dp
-                    )
-                )
+            HomeButtons(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .offset(y = 190.dp + 30.dp),
+                onLectureBtnTapped = onLectureBtnTapped,
+                onGameBtnTapped = onGameBtnTapped,
+                onAssignBtnTapped = onAssignBtnTapped,
+                onMyPageBtnTapped = onMyPageBtnTapped
             )
         }
-        LectureBtn(
-            onLectureBtnTapped = onLectureBtnTapped,
-            modifier = Modifier.boxAlign(
-                alignment = Alignment.TopStart,
-                offset = DpOffset(
-                    x = 52.0.dp,
-                    y = 459.0.dp
-                )
-            )
-        ) {
-            LectureRectangle()
-            LectureText(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 57.12451171875.dp,
-                        y = 15.919921875.dp
-                    )
-                )
-            )
-            LectureIcon(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 13.0.dp,
-                        y = 16.16845703125.dp
-                    )
-                )
-            )
-        }
-        GameBtn(
-            onGameBtnTapped = onGameBtnTapped,
-            modifier = Modifier.boxAlign(
-                alignment = Alignment.TopStart,
-                offset = DpOffset(
-                    x = 230.0.dp,
-                    y = 459.0.dp
-                )
-            )
-        ) {
-            GameRectangle()
-            GameText(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 58.060546875.dp,
-                        y = 15.919921875.dp
-                    )
-                )
-            )
-            GameIcon(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 15.99169921875.dp,
-                        y = 18.16845703125.dp
-                    )
-                )
-            )
-        }
-        AssignBtn(
-            onAssignBtnTapped = onAssignBtnTapped,
-            modifier = Modifier.boxAlign(
-                alignment = Alignment.TopStart,
-                offset = DpOffset(
-                    x = 52.0.dp,
-                    y = 552.0.dp
-                )
-            )
-        ) {
-            AssignRectangle()
-            AssignText(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 57.12451171875.dp,
-                        y = 15.919921875.dp
-                    )
-                )
-            )
-            AssignIcon(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 12.0.dp,
-                        y = 10.0.dp
-                    )
-                )
-            )
-        }
-        MypageBtn(
-            onMypageBtnTapped = onMypageBtnTapped,
-            modifier = Modifier.boxAlign(
-                alignment = Alignment.TopStart,
-                offset = DpOffset(
-                    x = 230.0.dp,
-                    y = 552.0.dp
-                )
-            )
-        ) {
-            MypageRectangle()
-            MypageText(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 49.6328125.dp,
-                        y = 13.9833984375.dp
-                    )
-                )
-            )
-            MypageIcon(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 10.99169921875.dp,
-                        y = 9.0.dp
-                    )
-                )
-            )
-        }
+
         LogoutBtn(
             onLogoutBtnTapped = onLogoutBtnTapped,
             modifier = Modifier.boxAlign(
@@ -240,9 +95,11 @@ private fun HomePreview() {
                 onLectureBtnTapped = {},
                 onGameBtnTapped = {},
                 onAssignBtnTapped = {},
-                onMypageBtnTapped = {},
+                onMyPageBtnTapped = {},
                 onLogoutBtnTapped = {},
-                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
+                modifier = Modifier
+                    .rowWeight(1.0f)
+                    .columnWeight(1.0f)
             )
         }
     }
@@ -253,7 +110,9 @@ fun BackgroundImg(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.home_background_img),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(932.0.dp)
+        modifier = modifier
+            .requiredWidth(430.0.dp)
+            .requiredHeight(932.0.dp)
     )
 }
 
@@ -261,19 +120,22 @@ fun BackgroundImg(modifier: Modifier = Modifier) {
 fun TodayAssignRectanble(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.home_today_assign_rectanble),
-        modifier = modifier.requiredWidth(309.0.dp).requiredHeight(168.0.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 0.0.dp,
-            blur = 10.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .requiredWidth(309.0.dp)
+            .requiredHeight(168.0.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 0.0.dp,
+                blur = 10.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -293,7 +155,9 @@ fun TotayAssignDescription(modifier: Modifier = Modifier) {
         textAlign = TextAlign.Left,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(247.0.dp).requiredHeight(36.0.dp)
+        modifier = modifier
+            .requiredWidth(247.0.dp)
+            .requiredHeight(36.0.dp)
     )
 }
 
@@ -313,7 +177,9 @@ fun TotayAssignTitle(modifier: Modifier = Modifier) {
         textAlign = TextAlign.Left,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(247.0.dp).requiredHeight(38.0.dp)
+        modifier = modifier
+            .requiredWidth(247.0.dp)
+            .requiredHeight(38.0.dp)
     )
 }
 
@@ -333,7 +199,9 @@ fun InfoTitle(modifier: Modifier = Modifier) {
         textAlign = TextAlign.Left,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(91.0.dp).requiredHeight(20.0.dp)
+        modifier = modifier
+            .requiredWidth(91.0.dp)
+            .requiredHeight(20.0.dp)
     )
 }
 
@@ -346,7 +214,9 @@ fun TodayAssignInfo(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(309.0.dp).requiredHeight(168.0.dp)
+        modifier = modifier
+            .requiredWidth(309.0.dp)
+            .requiredHeight(168.0.dp)
     )
 }
 
@@ -354,7 +224,9 @@ fun TodayAssignInfo(
 fun LectureRectangle(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.home_lecture_rectangle),
-        modifier = modifier.requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp)
+        modifier = modifier
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
     )
 }
 
@@ -373,7 +245,9 @@ fun LectureText(modifier: Modifier = Modifier) {
         height = 1.4479999542236328.em,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(69.29833984375.dp).requiredHeight(27.157470703125.dp)
+        modifier = modifier
+            .requiredWidth(69.29833984375.dp)
+            .requiredHeight(27.157470703125.dp)
     )
 }
 
@@ -382,7 +256,9 @@ fun LectureIcon(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.home_lecture_icon),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(35.0.dp).requiredHeight(27.197509765625.dp)
+        modifier = modifier
+            .requiredWidth(35.0.dp)
+            .requiredHeight(27.197509765625.dp)
     )
 }
 
@@ -396,19 +272,23 @@ fun LectureBtn(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.tappable(onTap = onLectureBtnTapped).requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 0.0.dp,
-            blur = 4.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .tappable(onTap = onLectureBtnTapped)
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 0.0.dp,
+                blur = 4.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -416,7 +296,9 @@ fun LectureBtn(
 fun GameRectangle(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.home_game_rectangle),
-        modifier = modifier.requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp)
+        modifier = modifier
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
     )
 }
 
@@ -435,7 +317,9 @@ fun GameText(modifier: Modifier = Modifier) {
         height = 1.4479999542236328.em,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(69.29833984375.dp).requiredHeight(27.157470703125.dp)
+        modifier = modifier
+            .requiredWidth(69.29833984375.dp)
+            .requiredHeight(27.157470703125.dp)
     )
 }
 
@@ -444,7 +328,9 @@ fun GameIcon(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.home_game_icon),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(35.0.dp).requiredHeight(24.76611328125.dp)
+        modifier = modifier
+            .requiredWidth(35.0.dp)
+            .requiredHeight(24.76611328125.dp)
     )
 }
 
@@ -458,19 +344,23 @@ fun GameBtn(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.tappable(onTap = onGameBtnTapped).requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 0.0.dp,
-            blur = 4.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .tappable(onTap = onGameBtnTapped)
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 0.0.dp,
+                blur = 4.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -478,7 +368,9 @@ fun GameBtn(
 fun AssignRectangle(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.home_assign_rectangle),
-        modifier = modifier.requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp)
+        modifier = modifier
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
     )
 }
 
@@ -497,7 +389,9 @@ fun AssignText(modifier: Modifier = Modifier) {
         height = 1.4479999542236328.em,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(69.29833984375.dp).requiredHeight(27.157470703125.dp)
+        modifier = modifier
+            .requiredWidth(69.29833984375.dp)
+            .requiredHeight(27.157470703125.dp)
     )
 }
 
@@ -506,7 +400,9 @@ fun AssignIcon(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.home_assign_icon),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(35.0.dp).requiredHeight(39.8896484375.dp)
+        modifier = modifier
+            .requiredWidth(35.0.dp)
+            .requiredHeight(39.8896484375.dp)
     )
 }
 
@@ -520,19 +416,23 @@ fun AssignBtn(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.tappable(onTap = onAssignBtnTapped).requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 0.0.dp,
-            blur = 4.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .tappable(onTap = onAssignBtnTapped)
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 0.0.dp,
+                blur = 4.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -540,7 +440,9 @@ fun AssignBtn(
 fun MypageRectangle(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.home_mypage_rectangle),
-        modifier = modifier.requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp)
+        modifier = modifier
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
     )
 }
 
@@ -559,7 +461,9 @@ fun MypageText(modifier: Modifier = Modifier) {
         height = 1.4479999542236328.em,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(86.15478515625.dp).requiredHeight(27.157470703125.dp)
+        modifier = modifier
+            .requiredWidth(86.15478515625.dp)
+            .requiredHeight(27.157470703125.dp)
     )
 }
 
@@ -568,7 +472,9 @@ fun MypageIcon(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.home_mypage_icon),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(35.0.dp).requiredHeight(37.916748046875.dp)
+        modifier = modifier
+            .requiredWidth(35.0.dp)
+            .requiredHeight(37.916748046875.dp)
     )
 }
 
@@ -582,19 +488,23 @@ fun MypageBtn(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.tappable(onTap = onMypageBtnTapped).requiredWidth(147.02490234375.dp).requiredHeight(58.997314453125.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 0.0.dp,
-            blur = 4.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .tappable(onTap = onMypageBtnTapped)
+            .requiredWidth(147.02490234375.dp)
+            .requiredHeight(58.997314453125.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 0.0.dp,
+                blur = 4.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -616,10 +526,12 @@ fun LogoutBtn(
         height = 1.4479999542236328.em,
         textAlign = TextAlign.Left,
         underline = true,
-        modifier = modifier.tappable(onTap = onLogoutBtnTapped).wrapContentHeight(
-            align = Alignment.Bottom,
-            unbounded = true
-        )
+        modifier = modifier
+            .tappable(onTap = onLogoutBtnTapped)
+            .wrapContentHeight(
+                align = Alignment.Bottom,
+                unbounded = true
+            )
     )
 }
 
@@ -637,6 +549,8 @@ fun TopLevel(
         ),
         isStructured = false,
         content = content,
-        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
+        modifier = modifier
+            .fillMaxWidth(1.0f)
+            .fillMaxHeight(1.0f)
     )
 }
