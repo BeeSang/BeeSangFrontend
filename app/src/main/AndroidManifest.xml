@@ -89,6 +89,12 @@
         android:exported="false">
         </activity>
 
+        <!-- Video Activity -->
+        <activity
+            android:name=".activities.VideoActivity"
+            android:exported="false">
+        </activity>
+
 
     </application>
 

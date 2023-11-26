@@ -37,14 +37,10 @@ class LectureActivity : ComponentActivity() {
     }
 
     private fun onBackBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
-            startActivity(this)
-        }
+        finish()
     }
     private fun onHomeBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
-            startActivity(this)
-        }
+        finish()
     }
 
     private fun onCardTapped(week: Int, title: String) {

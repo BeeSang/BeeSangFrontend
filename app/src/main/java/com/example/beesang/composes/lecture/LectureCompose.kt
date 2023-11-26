@@ -2,6 +2,7 @@ package com.example.beesang.composes.lecture
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.beesang.composes.NavigationBar
 import com.example.beesang.composes.TopLevel
 import com.example.beesang.composes.layout.BackgroundImg
+import com.example.beesang.composes.lecture.board.ChapterBoard
 import com.example.beesang.login.notoSansKR
 import com.example.beesang.retrofit.ApiObject
 import com.example.beesang.retrofit.response.ChapterReadResponse
@@ -43,8 +45,16 @@ fun LectureCompose(
     onHomeBtnTapped: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    TopLevel(modifier = modifier) {
-        BackgroundImg()
+    TopLevel(
+        modifier = modifier
+            .background(color = Color(
+                alpha = 255,
+                red = 250,
+                green = 240,
+                blue = 202
+                )
+            )
+    ) {
         Column(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -68,7 +78,7 @@ fun LectureCompose(
                 textAlign = TextAlign.Center,
                 modifier = modifier.fillMaxWidth(1.0f)
             )
-            Spacer(modifier = Modifier.height(50.0.dp))
+            Spacer(modifier = Modifier.height(30.0.dp))
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
@@ -79,7 +89,7 @@ fun LectureCompose(
 
                 results.value?.let {
                     for(i in it.indices) {
-                        LectureWeekCard(onCardTapped, it[i].week, it[i].title)
+                        ChapterBoard(week = it[i].week, title = it[i].title, onCardTapped = onCardTapped)
                         Spacer(modifier = Modifier.height(20.0.dp))
                     }
                 }
@@ -105,17 +115,3 @@ suspend fun getChapterData(): List<ChapterReadResponse> = suspendCoroutine {
         }
     })
 }
-
-//@Preview(widthDp = 430, heightDp = 927)
-//@Composable
-//private fun LecturePreview() {
-//    MaterialTheme {
-//        RelayContainer {
-//            LectureCompose(
-//                modifier = Modifier
-//                    .rowWeight(1.0f)
-//                    .columnWeight(1.0f)
-//            )
-//        }
-//    }
-//}

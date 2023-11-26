@@ -6,11 +6,14 @@ import android.nfc.Tag
 import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -35,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import com.example.beesang.composes.NavigationBar
 import com.example.beesang.composes.TopLevel
 import com.example.beesang.composes.layout.BackgroundImg
+import com.example.beesang.composes.lecture.board.LectureBoard
 import com.example.beesang.login.notoSansKR
 import com.example.beesang.retrofit.ApiObject
 import com.example.beesang.retrofit.response.ChapterReadResponse
@@ -59,38 +63,11 @@ fun ChapterCompose(
     title: String?,
     onBackBtnTapped: () -> Unit = {},
     onHomeBtnTapped: () -> Unit = {},
+    onLectureBoardTapped: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopLevel(modifier = modifier) {
-        BackgroundImg()
-        Column(
-            modifier = modifier,
-            horizontalAlignment = Alignment.CenterHorizontally
-
-        ) {
-            NavigationBar(
-                onBackBtnTapped,
-                onHomeBtnTapped
-            )
-            Spacer(modifier = Modifier.height(20.0.dp))
-            Text(
-                text = week.toString() + "주차:" + title,
-                fontSize = 24.0.sp,
-                fontWeight = FontWeight(700.0.toInt()),
-                fontFamily = notoSansKR,
-                color = Color(
-                    alpha = 255,
-                    red = 109,
-                    green = 85,
-                    blue = 0
-                ),
-                lineHeight = 24.0.sp,
-                textAlign = TextAlign.Center,
-                modifier = modifier
-                    .fillMaxWidth(1.0f)
-                    .padding(start = 20.0.dp, end = 20.0.dp)
-            )
-//            Spacer(modifier = Modifier.height(50.0.dp))
+        Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
             var isColumnVisible by remember { mutableStateOf(true) }
             var color1: Color
             var color2: Color
@@ -122,64 +99,84 @@ fun ChapterCompose(
                 )
             }
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(1.0f)
-            ) {
-                TextButton(
-                    onClick = {isColumnVisible = true},
-                    modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                        .drawBehind {
-                            val strokeWidth = 2.0f
-                            val y = size.height - strokeWidth / 2
-
-                            drawLine(
-                                color = color1,
-                                Offset(0f, y),
-                                Offset(size.width, y),
-                                strokeWidth * 5
-                            )
-                        }
-                ) {
-                    Text(
-                        text = "학습 하기",
-                        fontSize = 20.0.sp,
-                        fontWeight = FontWeight(700.0.toInt()),
-                        fontFamily = notoSansKR,
-                        color = color1,
-                        lineHeight = 20.0.sp,
-                    )
-                }
-                TextButton(
-                    onClick = {isColumnVisible = false},
+            RelayContainer(backgroundColor = Color(alpha = 255, red = 255, green = 251, blue = 238)) {
+                NavigationBar(onBackBtnTapped, onHomeBtnTapped)
+                Spacer(modifier = Modifier.height(10.0.dp))
+                Text(
+                    text = week.toString() + "주차: " + title,
+                    fontSize = 18.0.sp,
+                    fontWeight = FontWeight(700.0.toInt()),
+                    fontFamily = notoSansKR,
+                    color = Color(
+                        alpha = 255,
+                        red = 109,
+                        green = 85,
+                        blue = 0
+                    ),
+                    textAlign = TextAlign.Center,
+                    lineHeight = 18.0.sp,
+                    modifier = modifier
+                        .fillMaxWidth(1.0f)
+                )
+                Row(
                     modifier = Modifier
                         .fillMaxWidth(1.0f)
-                        .drawBehind {
-                            val strokeWidth = 2.0f
-                            val y = size.height - strokeWidth / 2
-
-                            drawLine(
-                                color = color2,
-                                Offset(0f, y),
-                                Offset(size.width, y),
-                                strokeWidth * 5
-                            )
-                        }
                 ) {
-                    Text(
-                        text = "퀴즈 풀기",
-                        fontSize = 20.0.sp,
-                        fontWeight = FontWeight(700.0.toInt()),
-                        fontFamily = notoSansKR,
-                        color = color2,
-                        lineHeight = 20.0.sp,
-                    )
+                    TextButton(
+                        onClick = {isColumnVisible = true},
+                        modifier = Modifier
+                            .fillMaxWidth(0.5f)
+                            .drawBehind {
+                                val strokeWidth = 2.0f
+                                val y = size.height - strokeWidth / 2
+
+                                drawLine(
+                                    color = color1,
+                                    Offset(0f, y),
+                                    Offset(size.width, y),
+                                    strokeWidth * 5
+                                )
+                            }
+                    ) {
+                        Text(
+                            text = "학습 하기",
+                            fontSize = 20.0.sp,
+                            fontWeight = FontWeight(700.0.toInt()),
+                            fontFamily = notoSansKR,
+                            color = color1,
+                            lineHeight = 20.0.sp,
+                        )
+                    }
+                    TextButton(
+                        onClick = {isColumnVisible = false},
+                        modifier = Modifier
+                            .fillMaxWidth(1.0f)
+                            .drawBehind {
+                                val strokeWidth = 2.0f
+                                val y = size.height - strokeWidth / 2
+
+                                drawLine(
+                                    color = color2,
+                                    Offset(0f, y),
+                                    Offset(size.width, y),
+                                    strokeWidth * 5
+                                )
+                            }
+                    ) {
+                        Text(
+                            text = "퀴즈 풀기",
+                            fontSize = 20.0.sp,
+                            fontWeight = FontWeight(700.0.toInt()),
+                            fontFamily = notoSansKR,
+                            color = color2,
+                            lineHeight = 20.0.sp,
+                        )
+                    }
                 }
             }
+
             Spacer(modifier = Modifier.height(30.0.dp))
-            if(isColumnVisible) {
-                //Lecture
+            if(isColumnVisible) { //LECTURE
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
@@ -191,8 +188,8 @@ fun ChapterCompose(
                     results.value?.let {
                         for(i in it.indices) {
                             Log.d("lecture", it[i].title)
-                            ChapterTimeCard(time = it[i].time, title = it[i].title, videoLink = it[i].videoLink)
-                            Spacer(modifier = Modifier.height(30.0.dp))
+                            LectureBoard(time = it[i].time, title = it[i].title, videoLink = it[i].videoLink, onLectureBoardTapped = onLectureBoardTapped)
+                            Spacer(modifier = Modifier.height(20.0.dp))
                         }
                     }
                 }

@@ -102,11 +102,11 @@ fun InAssignmentCompose(
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch { uploadAssignmentImage(applicationContext, body, id.toLong()) }
             }
-        }
 
-        Toast.makeText(applicationContext, "축하드려요! 10마리의 벌이 살아났어요!", Toast.LENGTH_SHORT).show()
-        Thread.sleep(1000)
-        refreshActivity()
+            Toast.makeText(applicationContext, "축하드려요! 10마리의 벌이 살아났어요!", Toast.LENGTH_SHORT).show()
+            Thread.sleep(1000)
+            refreshActivity()
+        }
     }
 
     val scope = CoroutineScope(Dispatchers.IO)
@@ -119,22 +119,32 @@ fun InAssignmentCompose(
     }
     TopLevel(modifier = modifier) {
         Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-            NavigationBar(onBackBtnTapped, onHomeBtnTapped)
-            Spacer(modifier = Modifier.height(10.0.dp))
-            RelayText(
-                content = title.toString(),
-                fontSize = 18.0.sp,
-                fontWeight = FontWeight(700.0.toInt()),
-                fontFamily = notoSansKR,
-                color = Color(
+            RelayContainer(
+                backgroundColor = Color(
                     alpha = 255,
-                    red = 109,
-                    green = 85,
-                    blue = 0
+                    red = 255,
+                    green = 251,
+                    blue = 238
                 ),
-                textAlign = TextAlign.Center,
-                modifier = modifier.fillMaxWidth(1.0f)
-            )
+            ) {
+                NavigationBar(onBackBtnTapped, onHomeBtnTapped)
+                Spacer(modifier = Modifier.height(10.0.dp))
+                RelayText(
+                    content = title.toString(),
+                    fontSize = 18.0.sp,
+                    fontWeight = FontWeight(700.0.toInt()),
+                    fontFamily = notoSansKR,
+                    color = Color(
+                        alpha = 255,
+                        red = 109,
+                        green = 85,
+                        blue = 0
+                    ),
+                    textAlign = TextAlign.Center,
+                    modifier = modifier.fillMaxWidth(1.0f)
+                )
+                Spacer(modifier = Modifier.height(20.0.dp))
+            }
             Spacer(modifier = Modifier.height(20.0.dp))
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 InAssignmentIndexBar(title = "참여 방법")

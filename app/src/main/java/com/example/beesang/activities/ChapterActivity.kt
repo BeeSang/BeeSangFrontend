@@ -28,7 +28,8 @@ class ChapterActivity : ComponentActivity() {
                         week,
                         title,
                         onBackBtnTapped = { onBackBtnTapped() },
-                        onHomeBtnTapped = { onHomeBtnTapped() }
+                        onHomeBtnTapped = { onHomeBtnTapped() },
+                        onLectureBoardTapped = { videoUrl -> onLectureBoardTapped(videoUrl) }
                     )
                 }
             }
@@ -36,9 +37,7 @@ class ChapterActivity : ComponentActivity() {
     }
 
     private fun onBackBtnTapped() {
-        Intent(this, LectureActivity::class.java).apply {
-            startActivity(this)
-        }
+        finish()
     }
     private fun onHomeBtnTapped() {
         Intent(this, HomeActivity::class.java).apply {
@@ -46,7 +45,9 @@ class ChapterActivity : ComponentActivity() {
         }
     }
 
-    private fun chapterCardTapped() {
-
+    private fun onLectureBoardTapped(videoUrl: String) {
+        val intent = Intent(this, VideoActivity::class.java)
+        intent.putExtra("videoUrl", videoUrl)
+        startActivity(intent)
     }
 }
