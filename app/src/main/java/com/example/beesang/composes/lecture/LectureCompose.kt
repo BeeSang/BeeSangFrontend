@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beesang.composes.NavigationBar
 import com.example.beesang.composes.TopLevel
-import com.example.beesang.composes.layout.BackgroundImg
 import com.example.beesang.composes.lecture.board.ChapterBoard
 import com.example.beesang.login.notoSansKR
 import com.example.beesang.retrofit.ApiObject

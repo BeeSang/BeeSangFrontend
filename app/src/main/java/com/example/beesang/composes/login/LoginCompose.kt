@@ -1,4 +1,4 @@
-package com.example.beesang.composes.layout
+package com.example.beesang.composes.login
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -12,26 +12,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -180,34 +171,6 @@ fun LoginCompose(
                             )
                         )
                     )
-//                    RememberIdBox(
-//                        modifier = Modifier.boxAlign(
-//                            alignment = Alignment.TopStart,
-//                            offset = DpOffset(
-//                                x = 78.0.dp,
-//                                y = 280.0.dp
-//                            )
-//                        )
-//                    ) {
-//                        RememberIdText(
-//                            modifier = Modifier.boxAlign(
-//                                alignment = Alignment.Center,
-//                                offset = DpOffset(
-//                                    x = 11.5.dp,
-//                                    y = -0.5.dp
-//                                )
-//                            )
-//                        )
-//                        RememberCheckBox(
-//                            modifier = Modifier.boxAlign(
-//                                alignment = Alignment.Center,
-//                                offset = DpOffset(
-//                                    x = -34.0.dp,
-//                                    y = 1.0.dp
-//                                )
-//                            )
-//                        )
-//                    }
                     Title(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,

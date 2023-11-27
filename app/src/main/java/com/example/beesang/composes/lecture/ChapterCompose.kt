@@ -1,23 +1,14 @@
 package com.example.beesang.composes.lecture
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.nfc.Tag
 import android.util.Log
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -32,21 +23,16 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beesang.composes.NavigationBar
 import com.example.beesang.composes.TopLevel
-import com.example.beesang.composes.layout.BackgroundImg
 import com.example.beesang.composes.lecture.board.LectureBoard
 import com.example.beesang.login.notoSansKR
 import com.example.beesang.retrofit.ApiObject
-import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.example.beesang.retrofit.response.LectureReadResponse
 import com.example.beesang.retrofit.response.QuizReadResponse
 import com.google.relay.compose.RelayContainer
-import com.google.relay.compose.RelayText
-import com.google.relay.compose.relayBorder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -174,8 +160,9 @@ fun ChapterCompose(
                     }
                 }
             }
-
             Spacer(modifier = Modifier.height(30.0.dp))
+
+            var isQuizVisible by remember { mutableStateOf(false) }
             if(isColumnVisible) { //LECTURE
                 Column(
                     modifier = Modifier
@@ -193,8 +180,7 @@ fun ChapterCompose(
                         }
                     }
                 }
-            } else {
-                //Quiz
+            } else { //Quiz
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
@@ -205,8 +191,14 @@ fun ChapterCompose(
 
                     results.value?.let {
                         for(i in it.indices) {
-                            QuizTimeCard(time = it[i].time, title = it[i].title, question = it[i].question, description = it[i].description, answer = it[i].answer)
-                            Spacer(modifier = Modifier.height(30.0.dp))
+                            QuizTimeCard(
+                                time = it[i].time,
+                                title = it[i].title,
+                                question = it[i].question,
+                                description = it[i].description,
+                                answer = it[i].answer
+                            )
+                            Spacer(modifier = Modifier.height(20.0.dp))
                         }
                     }
                 }

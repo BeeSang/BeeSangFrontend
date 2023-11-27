@@ -33,6 +33,9 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.beesang.R
+import com.example.beesang.composes.lecture.quiz.QuizAnswerBoard
+import com.example.beesang.composes.lecture.quiz.QuizCloseBoard
+import com.example.beesang.composes.lecture.quiz.QuizOpenBoard
 import com.example.beesang.login.notoSansKR
 import com.google.relay.compose.BoxScopeInstance.boxAlign
 import com.google.relay.compose.RelayContainer
@@ -48,311 +51,57 @@ fun QuizTimeCard(
     answer: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    var showAnswer by remember { mutableStateOf(false) }
+    var showOX by remember { mutableStateOf("") }
+    var isAnswer by remember { mutableStateOf("") }
+
     var isAnswerVisible by remember { mutableStateOf(false) }
+    var isOpenVisible by remember { mutableStateOf(true) }
     if(!isAnswerVisible) {
-        Card(
-            onClick = {isAnswerVisible = !isAnswerVisible},
-            colors = CardDefaults.cardColors(
-                containerColor = Color(
-                    alpha = 255,
-                    red = 255,
-                    green = 251,
-                    blue = 238
-                )
-            ),
-            shape = RoundedCornerShape(14.dp),
-            modifier = modifier
-                .requiredHeight(120.0.dp)
-                .fillMaxWidth(0.8f)
-                .boxAlign(
-                    alignment = Alignment.Center,
-                    offset = DpOffset(
-                        x = 0.0.dp,
-                        y = 0.0.dp
-                    )
-                )
-        ) {
-            Column(
-                modifier = modifier
-                    .padding(8.0.dp)
-                    .fillMaxWidth(1.0f)
-                    .fillMaxHeight(1.0f)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = modifier
-                        .boxAlign(
-                            alignment = Alignment.TopStart,
-                            offset = DpOffset(
-                                x = 0.0.dp,
-                                y = 0.0.dp
-                            )
-                        )
-                        .fillMaxWidth(1.0f)
-                        .requiredHeight(40.0.dp)
-                        .padding(start = 10.0.dp, end = 10.0.dp)
-                ) {
-                    Text(
-                        text = time.toString() + "차시",
-                        fontSize = 15.0.sp,
-                        fontWeight = FontWeight(700.0.toInt()),
-                        fontFamily = notoSansKR,
-                        color = Color(
-                            alpha = 255,
-                            red = 115,
-                            green = 115,
-                            blue = 115
-                        ),
-                        textAlign = TextAlign.Left,
-                        modifier = modifier
-                    )
-                    Spacer(Modifier.weight(1.0f))
-                    RelayImage(
-                        image = painterResource(R.drawable.arrow_under),
-                        contentScale = ContentScale.Crop,
-                        modifier = modifier
-                            .requiredWidth(20.0.dp)
-                            .requiredHeight(20.0.dp)
-                            .boxAlign(
-                                alignment = Alignment.TopEnd,
-                                offset = DpOffset(
-                                    x = 0.0.dp,
-                                    y = 0.0.dp
-                                )
-                            )
-                    )
-                }
-                Text(
-                    text = title,
-                    fontSize = 26.0.sp,
-                    fontWeight = FontWeight(700.0.toInt()),
-                    fontFamily = notoSansKR,
-                    color = Color(
-                        alpha = 255,
-                        red = 109,
-                        green = 85,
-                        blue = 0
-                    ),
-                    textAlign = TextAlign.Left,
-                    modifier = modifier
-                        .fillMaxWidth(1.0f)
-//                        .requiredHeight(40.0.dp)
-                        .padding(start = 10.0.dp)
-                )
-            }
-        }
+        QuizCloseBoard(time = time, title = title, onBoardTapped = { isAnswerVisible = true })
     }
     else {
-        Card(
-            onClick = {isAnswerVisible = !isAnswerVisible},
-            colors = CardDefaults.cardColors(
-                containerColor = Color(
-                    alpha = 255,
-                    red = 255,
-                    green = 251,
-                    blue = 238
-                )
-            ),
-            shape = RoundedCornerShape(14.dp),
-            modifier = modifier
-                .requiredHeight(350.0.dp)
-                .fillMaxWidth(0.8f)
-                .boxAlign(
-                    alignment = Alignment.Center,
-                    offset = DpOffset(
-                        x = 0.0.dp,
-                        y = 0.0.dp
-                    )
-                )
-        ) {
-            Column(
-                modifier = modifier
-                    .padding(8.0.dp)
-                    .fillMaxWidth(1.0f)
-                    .fillMaxHeight(1.0f)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = modifier
-                        .boxAlign(
-                            alignment = Alignment.TopStart,
-                            offset = DpOffset(
-                                x = 0.0.dp,
-                                y = 0.0.dp
-                            )
-                        )
-                        .fillMaxWidth(1.0f)
-                        .requiredHeight(40.0.dp)
-                        .padding(start = 10.0.dp, end = 10.0.dp)
-                ) {
-                    Text(
-                        text = time.toString() + "차시",
-                        fontSize = 15.0.sp,
-                        fontWeight = FontWeight(700.0.toInt()),
-                        fontFamily = notoSansKR,
-                        color = Color(
-                            alpha = 255,
-                            red = 115,
-                            green = 115,
-                            blue = 115
-                        ),
-                        textAlign = TextAlign.Left,
-                        modifier = modifier
-                    )
-                    Spacer(Modifier.weight(1.0f))
-                    RelayImage(
-                        image = painterResource(R.drawable.arrow_top),
-                        contentScale = ContentScale.Crop,
-                        modifier = modifier
-                            .requiredWidth(20.0.dp)
-                            .requiredHeight(20.0.dp)
-                            .boxAlign(
-                                alignment = Alignment.TopEnd,
-                                offset = DpOffset(
-                                    x = 0.0.dp,
-                                    y = 0.0.dp
-                                )
-                            )
-                    )
-                }
-                Text(
-                    text = title,
-                    fontSize = 26.0.sp,
-                    fontWeight = FontWeight(700.0.toInt()),
-                    fontFamily = notoSansKR,
-                    color = Color(
-                        alpha = 255,
-                        red = 109,
-                        green = 85,
-                        blue = 0
-                    ),
-                    textAlign = TextAlign.Left,
-                    modifier = modifier
-                        .fillMaxWidth(1.0f)
-//                        .requiredHeight(40.0.dp)
-                        .padding(start = 10.0.dp)
-                )
-                Text(
-                    text = "QUIZ!",
-                    fontSize = 30.0.sp,
-                    fontWeight = FontWeight(700.0.toInt()),
-                    fontFamily = notoSansKR,
-                    color = Color(
-                        alpha = 255,
-                        red = 84,
-                        green = 39,
-                        blue = 0
-                    ),
-                    textAlign = TextAlign.Center,
-                    modifier = modifier
-                        .fillMaxWidth(1.0f)
-                )
-                Text(
-                    text = question,
-                    fontSize = 14.0.sp,
-                    fontWeight = FontWeight(700.0.toInt()),
-                    fontFamily = notoSansKR,
-                    color = Color(
-                        alpha = 255,
-                        red = 84,
-                        green = 39,
-                        blue = 0
-                    ),
-                    textAlign = TextAlign.Center,
-                    modifier = modifier
-                        .fillMaxWidth(1.0f)
-                )
-                Spacer(modifier = Modifier.height(20.0.dp))
-
-                var submit by remember { mutableStateOf(false) }
-                var isAnswer by remember { mutableStateOf(true) }
-                if(!submit) {
-                    Row(
-                        modifier = modifier
-                            .fillMaxWidth(1.0f)
-                            .padding(start = 20.0.dp, end = 20.0.dp)
-                    ) {
-                        OutlinedButton(
-                            onClick = {
-                                if(answer) isAnswer = true;
-                                else isAnswer = false;
-                                submit = true;
-                            },
-                            modifier = modifier
-                                .requiredWidth(120.0.dp)
-                        ) {
-                            Text("O")
-                        }
-                        Spacer(modifier = Modifier.weight(1.0f))
-                        OutlinedButton(
-                            onClick = {
-                                if(answer) isAnswer = false;
-                                else isAnswer = true;
-                                submit = true;
-                            },
-                            modifier = modifier
-                                .requiredWidth(120.0.dp)
-                        ) {
-                            Text("X")
-                        }
-                    }
-                }
-                else {
-                    if(isAnswer) {
-                        Text(
-                            text = "정답입니다!",
-                            fontSize = 14.0.sp,
-                            fontWeight = FontWeight(700.0.toInt()),
-                            fontFamily = notoSansKR,
-                            color = Color(
-                                alpha = 255,
-                                red = 84,
-                                green = 39,
-                                blue = 0
-                            ),
-                            textAlign = TextAlign.Center,
-                            modifier = modifier
-                                .fillMaxWidth(1.0f)
-                        )
+        if(isOpenVisible) {
+            QuizOpenBoard(
+                time = time, title = title,
+                question = question, onBoardTapped = { isAnswerVisible = false },
+                onOkBtnTapped = {
+                    if(answer) { //정답
+                        showOX = "O"
+                        isAnswer = "정답입니다!"
                     } else {
-                        Text(
-                            text = "오답입니다!",
-                            fontSize = 14.0.sp,
-                            fontWeight = FontWeight(700.0.toInt()),
-                            fontFamily = notoSansKR,
-                            color = Color(
-                                alpha = 255,
-                                red = 84,
-                                green = 39,
-                                blue = 0
-                            ),
-                            textAlign = TextAlign.Center,
-                            modifier = modifier
-                                .fillMaxWidth(1.0f)
-                        )
+                        showOX = "X"
+                        isAnswer = "오답입니다..ㅜㅜㅜ"
                     }
-
-//                    Text(
-//                        text = description,
-//                        fontSize = 14.0.sp,
-//                        fontWeight = FontWeight(700.0.toInt()),
-//                        fontFamily = notoSansKR,
-//                        color = Color(
-//                            alpha = 255,
-//                            red = 84,
-//                            green = 39,
-//                            blue = 0
-//                        ),
-//                        textAlign = TextAlign.Center,
-//                        modifier = modifier
-//                            .fillMaxWidth(1.0f)
-//                    )
+                    showAnswer = true
+                    isOpenVisible = false
+                },
+                onNoBtnTapped = {
+                    if(!answer) { //정답
+                        showOX = "X"
+                        isAnswer = "정답입니다!"
+                    } else {
+                        showOX = "O"
+                        isAnswer = "오답입니다..ㅜㅜㅜ"
+                    }
+                    showAnswer = true
+                    isOpenVisible = false
                 }
-
-            }
+            )
         }
     }
 
+    if(showAnswer) {
+        QuizAnswerBoard(
+            time = time, title = title,
+            question = question, description = description,
+            answer = showOX, isAnswer = isAnswer, onBoardTapped = {
+                showAnswer = false
+                isAnswerVisible = false
+                isOpenVisible = true
+            }
+        )
+    }
 }
 
 @Preview(widthDp = 430, heightDp = 927)

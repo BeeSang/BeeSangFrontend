@@ -86,8 +86,6 @@ class RegisterActivity : ComponentActivity() {
     }
 
     private fun backBtnClick() {
-        Intent(this, LoginActivity::class.java).also {
-            startActivity(it)
-        }
+        finish()
     }
 }

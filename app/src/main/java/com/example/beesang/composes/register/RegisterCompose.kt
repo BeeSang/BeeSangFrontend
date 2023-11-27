@@ -1,9 +1,15 @@
 package com.example.beesang.composes.register
 
+import android.widget.Space
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
@@ -16,13 +22,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.beesang.R
+import com.example.beesang.composes.BackBtn
+import com.example.beesang.composes.BackgroundImg
+import com.example.beesang.composes.TopLevel
 import com.example.beesang.login.notoSansKR
+import com.google.relay.compose.BoxScopeInstanceImpl.align
 import com.google.relay.compose.CrossAxisAlignment
 import com.google.relay.compose.MainAxisAlignment
 import com.google.relay.compose.RelayContainer
@@ -56,112 +68,38 @@ fun RegisterCompose(
     modifier: Modifier = Modifier
 ) {
     TopLevel(modifier = modifier) {
-        AutoLayout {
-            AutoLayoutSynth {
-                BackgroundImg()
-            }
-            MiddleFrame(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 57.0.dp,
-                        y = 71.0.dp
-                    )
-                )
+        BackgroundImg()
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Row(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(start = 20.dp, top = 20.dp)
             ) {
-                InputBox(
-                    modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopStart,
-                        offset = DpOffset(
-                            x = 21.0.dp,
-                            y = 143.0.dp
-                        )
-                    )
-                ) {
-                    InputAutoLayout {
-                        Id(id, onIdChange)
-                        Password(password, onPasswordChange)
-                        CheckPassword(checkPassword, onCheckPasswordChange)
-                        Name(name, onNameChange)
-                        School(school, onSchoolChange)
-                        StudentId(studentId, onStudentIdChange)
-                    }
-                }
-                Title(
-                    modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopStart,
-                        offset = DpOffset(
-                            x = 68.0.dp,
-                            y = 0.0.dp
-                        )
-                    )
+                BackBtn(
+                    onBackBtnTapped = { onBackBtn2Tapped() },
                 )
-                RegisterBtn(
-                    onRegisterBtnTapped = onRegisterBtnTapped,
-                    modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopStart,
-                        offset = DpOffset(
-                            x = 96.0.dp,
-                            y = 683.0.dp
-                        )
-                    )
-                ) {
-                    RegisterRectangle(
-                        modifier = Modifier.boxAlign(
-                            alignment = Alignment.Center,
-                            offset = DpOffset(
-                                x = -4.0.dp,
-                                y = 0.0.dp
-                            )
-                        )
-                    )
-                    RegisterText(
-                        modifier = Modifier.boxAlign(
-                            alignment = Alignment.TopStart,
-                            offset = DpOffset(
-                                x = 19.0.dp,
-                                y = 13.0.dp
-                            )
-                        )
-                    )
-                }
-                BackBtn2(
-                    onBackBtn2Tapped = onBackBtn2Tapped,
-                    modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopStart,
-                        offset = DpOffset(
-                            x = 0.0.dp,
-                            y = 16.0.dp
-                        )
-                    )
-                )
+                Spacer(modifier = Modifier.weight(1.0f))
             }
+            Spacer(modifier = Modifier.requiredHeight(30.dp))
+            RegisterTop()
+            Spacer(modifier = Modifier.requiredHeight(20.dp))
+            Id(id, onIdChange)
+            Spacer(modifier = Modifier.requiredHeight(14.dp))
+            Password(password, onPasswordChange)
+            Spacer(modifier = Modifier.requiredHeight(14.dp))
+            CheckPassword(checkPassword, onCheckPasswordChange)
+            Spacer(modifier = Modifier.requiredHeight(14.dp))
+            Name(name, onNameChange)
+            Spacer(modifier = Modifier.requiredHeight(14.dp))
+            School(school, onSchoolChange)
+            Spacer(modifier = Modifier.requiredHeight(14.dp))
+            StudentId(studentId, onStudentIdChange)
+            Spacer(modifier = Modifier.requiredHeight(24.dp))
+            RegisterButton(onBtnTapped = onRegisterBtnTapped)
         }
     }
-}
-
-@Composable
-fun BackgroundImg(modifier: Modifier = Modifier) {
-    RelayImage(
-        image = painterResource(R.drawable.register_background_img),
-        contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(932.0.dp)
-    )
-}
-
-@Composable
-fun AutoLayoutSynth(
-    modifier: Modifier = Modifier,
-    content: @Composable RelayContainerScope.() -> Unit
-) {
-    RelayContainer(
-        mainAxisAlignment = MainAxisAlignment.Start,
-        crossAxisAlignment = CrossAxisAlignment.Start,
-        arrangement = RelayContainerArrangement.Row,
-        itemSpacing = 10.0,
-        content = content,
-        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(932.0.dp).alpha(alpha = 100.0f)
-    )
 }
 
 @Composable
@@ -190,7 +128,7 @@ fun Id(id:String, onIdChange: (String) -> Unit, modifier: Modifier = Modifier) {
 
     TextField(
         value = id,
-        placeholder = { PH("아이디") },
+        placeholder = { PH("아이디*(영문소문자/숫자, 4~16자)") },
         shape = MaterialTheme.shapes.small,
         maxLines = 1,
         singleLine = true,
@@ -207,11 +145,9 @@ fun Id(id:String, onIdChange: (String) -> Unit, modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Password(password: String, onPasswordChange: (String) -> Unit, modifier: Modifier = Modifier) {
-//    var text by remember { mutableStateOf("") }
-
     TextField(
         value = password,
-        placeholder = { PH("비밀번호") },
+        placeholder = { PH("비밀번호*(영문소문자/숫자, 8~16자)") },
         shape = MaterialTheme.shapes.small,
         maxLines = 1,
         singleLine = true,
@@ -220,6 +156,10 @@ fun Password(password: String, onPasswordChange: (String) -> Unit, modifier: Mod
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
+        ),
+        visualTransformation = PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions.Default.copy(
+            keyboardType = KeyboardType.Password
         ),
         onValueChange = onPasswordChange,
     )
@@ -230,7 +170,7 @@ fun Password(password: String, onPasswordChange: (String) -> Unit, modifier: Mod
 fun CheckPassword(checkPassword: String, onCheckPasswordChange: (String) -> Unit, modifier: Modifier = Modifier) {
     TextField(
         value = checkPassword,
-        placeholder = { PH("비밀번호 확인") },
+        placeholder = { PH("비밀번호 확인*") },
         shape = MaterialTheme.shapes.small,
         maxLines = 1,
         singleLine = true,
@@ -239,6 +179,10 @@ fun CheckPassword(checkPassword: String, onCheckPasswordChange: (String) -> Unit
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
+        ),
+        visualTransformation = PasswordVisualTransformation(),
+        keyboardOptions = KeyboardOptions.Default.copy(
+            keyboardType = KeyboardType.Password
         ),
         onValueChange = onCheckPasswordChange,
     )
@@ -251,7 +195,7 @@ fun Name(name: String, onNameChange: (String) -> Unit, modifier: Modifier = Modi
 
     TextField(
         value = name,
-        placeholder = { PH("이름") },
+        placeholder = { PH("이름*") },
         shape = MaterialTheme.shapes.small,
         maxLines = 1,
         singleLine = true,
@@ -272,7 +216,7 @@ fun School(school: String, onSchoolChange: (String) -> Unit, modifier: Modifier 
 
     TextField(
         value = school,
-        placeholder = { PH("학교") },
+        placeholder = { PH("학교*") },
         shape = MaterialTheme.shapes.small,
         maxLines = 1,
         singleLine = true,
@@ -293,7 +237,7 @@ fun StudentId(studentId: String, onStudentIdChange: (String) -> Unit, modifier: 
 
     TextField(
         value = studentId,
-        placeholder = { PH("학번") },
+        placeholder = { PH("학년 반 번호* (ex.1학년 2반 1번-10201)") },
         shape = MaterialTheme.shapes.small,
         maxLines = 1,
         singleLine = true,
@@ -331,7 +275,9 @@ fun InputBox(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(274.0.dp).requiredHeight(504.0.dp)
+        modifier = modifier
+            .requiredWidth(274.0.dp)
+            .requiredHeight(504.0.dp)
     )
 }
 
@@ -340,7 +286,9 @@ fun Title(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.register_title),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(180.0.dp).requiredHeight(75.0.dp)
+        modifier = modifier
+            .requiredWidth(180.0.dp)
+            .requiredHeight(75.0.dp)
     )
 }
 
@@ -348,19 +296,22 @@ fun Title(modifier: Modifier = Modifier) {
 fun RegisterRectangle(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.register_register_rectangle),
-        modifier = modifier.requiredWidth(122.0.dp).requiredHeight(47.0.dp).relayDropShadow(
-            color = Color(
-                alpha = 63,
-                red = 0,
-                green = 0,
-                blue = 0
-            ),
-            borderRadius = 50.0.dp,
-            blur = 4.0.dp,
-            offsetX = 0.0.dp,
-            offsetY = 4.0.dp,
-            spread = 0.0.dp
-        )
+        modifier = modifier
+            .requiredWidth(122.0.dp)
+            .requiredHeight(47.0.dp)
+            .relayDropShadow(
+                color = Color(
+                    alpha = 63,
+                    red = 0,
+                    green = 0,
+                    blue = 0
+                ),
+                borderRadius = 50.0.dp,
+                blur = 4.0.dp,
+                offsetX = 0.0.dp,
+                offsetY = 4.0.dp,
+                spread = 0.0.dp
+            )
     )
 }
 
@@ -369,7 +320,9 @@ fun RegisterText(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.register_register_text),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(85.6123046875.dp).requiredHeight(22.8299560546875.dp)
+        modifier = modifier
+            .requiredWidth(85.6123046875.dp)
+            .requiredHeight(22.8299560546875.dp)
     )
 }
 
@@ -383,7 +336,10 @@ fun RegisterBtn(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.tappable(onTap = onRegisterBtnTapped).requiredWidth(122.0.dp).requiredHeight(47.0.dp)
+        modifier = modifier
+            .tappable(onTap = onRegisterBtnTapped)
+            .requiredWidth(122.0.dp)
+            .requiredHeight(47.0.dp)
     )
 }
 
@@ -395,7 +351,10 @@ fun BackBtn2(
     RelayImage(
         image = painterResource(R.drawable.register_back_btn2),
         contentScale = ContentScale.Crop,
-        modifier = modifier.tappable(onTap = onBackBtn2Tapped).requiredWidth(43.0.dp).requiredHeight(44.0.dp)
+        modifier = modifier
+            .tappable(onTap = onBackBtn2Tapped)
+            .requiredWidth(43.0.dp)
+            .requiredHeight(44.0.dp)
     )
 }
 
@@ -408,36 +367,8 @@ fun MiddleFrame(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(295.0.dp).requiredHeight(730.0.dp)
-    )
-}
-
-@Composable
-fun AutoLayout(
-    modifier: Modifier = Modifier,
-    content: @Composable RelayContainerScope.() -> Unit
-) {
-    RelayContainer(
-        isStructured = false,
-        content = content,
-        modifier = modifier.requiredWidth(430.0.dp).requiredHeight(932.0.dp)
-    )
-}
-
-@Composable
-fun TopLevel(
-    modifier: Modifier = Modifier,
-    content: @Composable RelayContainerScope.() -> Unit
-) {
-    RelayContainer(
-        backgroundColor = Color(
-            alpha = 255,
-            red = 250,
-            green = 240,
-            blue = 202
-        ),
-        isStructured = false,
-        content = content,
-        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
+        modifier = modifier
+            .requiredWidth(295.0.dp)
+            .requiredHeight(730.0.dp)
     )
 }
