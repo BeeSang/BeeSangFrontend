@@ -7,20 +7,27 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.sp
 import com.example.beesang.R
+import com.example.beesang.intgamebuttons3.notoSansKR
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
+import com.google.relay.compose.RelayText
 import com.google.relay.compose.tappable
 
 @Composable
 fun ThirdButtonCompose(
     modifier: Modifier = Modifier,
+    total: Int,
     onNoBtnTapped: () -> Unit = {},
     onOkBtnTapped: () -> Unit = {}
 ) {
@@ -55,16 +62,15 @@ fun ThirdButtonCompose(
                     .tappable(onTap = onOkBtnTapped)
             )
             IngameButtons3Title()
-        }
-    }
-}
-
-@Preview(widthDp = 375, heightDp = 812)
-@Composable
-private fun ThirdButtonComposePreview() {
-    MaterialTheme {
-        RelayContainer {
-            ThirdButtonCompose(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
+            IngameButtons3Content(
+                modifier = Modifier.boxAlign(
+                    alignment = Alignment.TopStart,
+                    offset = DpOffset(
+                        x = 6.0.dp,
+                        y = 21.0.dp
+                    )
+                )
+            )
         }
     }
 }
@@ -87,12 +93,40 @@ fun IngameButtons3Ok(modifier: Modifier = Modifier) {
     )
 }
 
+//@Composable
+//fun IngameButtons3Title(modifier: Modifier = Modifier) {
+//    RelayImage(
+//        image = painterResource(R.drawable.intgame_buttons3_ingame_buttons3_title),
+//        contentScale = ContentScale.Crop,
+//        modifier = modifier.requiredWidth(298.0.dp).requiredHeight(90.0.dp)
+//    )
+//}
+
 @Composable
 fun IngameButtons3Title(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.intgame_buttons3_ingame_buttons3_title),
         contentScale = ContentScale.Crop,
         modifier = modifier.requiredWidth(298.0.dp).requiredHeight(90.0.dp)
+    )
+}
+
+@Composable
+fun IngameButtons3Content(modifier: Modifier = Modifier) {
+    RelayText(
+        content = "식물이 초기화되고\n 코인이 증가합니다.",
+        fontSize = 16.0.sp,
+        fontFamily = notoSansKR,
+        color = Color(
+            alpha = 255,
+            red = 0,
+            green = 0,
+            blue = 0
+        ),
+        height = 1.4479999542236328.em,
+        fontWeight = FontWeight(700.0.toInt()),
+        maxLines = -1,
+        modifier = modifier.requiredWidth(287.0.dp).requiredHeight(47.0.dp)
     )
 }
 

@@ -165,6 +165,7 @@ fun InGameCompose(
                 ThirdButtonCompose(
                     modifier = Modifier
                         .offset(x = 0.0.dp, y = 220.0.dp),
+                    total = 1,
                     onNoBtnTapped = {
                         isThirdVisible = false
                         isFirstVisible = false

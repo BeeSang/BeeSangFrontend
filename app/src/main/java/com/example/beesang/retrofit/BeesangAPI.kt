@@ -13,13 +13,13 @@ import com.example.beesang.retrofit.response.LectureReadResponse
 import com.example.beesang.retrofit.response.MyAssignmentReadResponse
 import com.example.beesang.retrofit.response.QuizReadResponse
 import com.example.beesang.retrofit.response.UserLoginResponse
+import com.example.beesang.retrofit.response.UserReadResponse
 import com.example.beesang.retrofit.response.UserRegisterResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -65,4 +65,11 @@ interface BeesangAPI {
 
     @GET("assignment/readMyAssignment/{assignmentId}")
     fun myAssignmentReadRequest(@Path(value = "assignmentId") assignmentId: Long, @Header("Authorization") token: String): Call<MyAssignmentReadResponse>
+
+    @GET("user")
+    fun userReadRequest(@Header("Authorization") token: String): Call<UserReadResponse>
+
+    @Multipart
+    @POST("user/profile/upload")
+    fun userProfileUpload(@Header("Authorization") token: String, @Part file: MultipartBody.Part): Call<Unit>
 }

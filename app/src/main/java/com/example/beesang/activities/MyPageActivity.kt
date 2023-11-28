@@ -8,8 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.beesang.composes.home.HomeCompose
-import com.example.beesang.composes.mypage.MyPage
+import com.example.beesang.composes.mypage.MyPageHome
 import com.example.beesang.ui.theme.BeeSangTheme
 
 class MyPageActivity : ComponentActivity() {
@@ -21,9 +20,25 @@ class MyPageActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MyPage()
+                    MyPageHome(
+                        applicationContext = applicationContext,
+                        onBackBtnTapped = { onBackBtnTapped() },
+                        refreshActivity = { refreshActivity() }
+                    )
                 }
             }
         }
+    }
+
+    private fun onBackBtnTapped() {
+        finish()
+    }
+
+    private fun refreshActivity() {
+        finish()
+        overridePendingTransition(0, 0)
+        val intent = intent
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 }
