@@ -41,6 +41,8 @@ import com.example.beesang.retrofit.readFarm
 import com.example.beesang.retrofit.response.FarmReadResponse
 import com.example.beesang.retrofit.response.FarmUpdateResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
+import com.example.beesang.retrofit.response.UserReadResponse
+import com.example.beesang.retrofit.userRead
 import com.google.relay.compose.BoxScopeInstance.boxAlign
 import com.google.relay.compose.BoxScopeInstance.scope
 import com.google.relay.compose.BoxScopeInstanceImpl.align
@@ -213,6 +215,14 @@ fun InGameCompose(
                 val result = remember { mutableStateOf<FarmUserInfoResponse?>(null) }
                 scope.launch { result.value = getUserInfo(applicationContext) }
 
+                val results2 = remember { mutableStateOf<UserReadResponse?>(null) }
+                scope.launch { results2.value = userRead(applicationContext) }
+
+                var imgPath by remember { mutableStateOf("") }
+                results2.value?.let {
+                    imgPath = it.imgPath
+                }
+
                 result.value?.let {
                     coin = it.coin
                     bees = it.bees
@@ -222,7 +232,8 @@ fun InGameCompose(
                         username = it.username,
                         coin = coin,
                         bees = bees,
-                        level = it.level
+                        level = it.level,
+                        imgPath = imgPath
                     )
                 }
 

@@ -14,8 +14,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,6 +33,8 @@ import com.example.beesang.retrofit.TokenStorage
 import com.example.beesang.retrofit.getUserInfo
 import com.example.beesang.retrofit.response.ChapterReadResponse
 import com.example.beesang.retrofit.response.FarmUserInfoResponse
+import com.example.beesang.retrofit.response.UserReadResponse
+import com.example.beesang.retrofit.userRead
 import com.google.relay.compose.BoxScopeInstanceImpl.align
 import com.google.relay.compose.ColumnScopeInstance.boxAlign
 import com.google.relay.compose.RelayContainer
@@ -63,12 +67,21 @@ fun GameHome(
             val result = remember { mutableStateOf<FarmUserInfoResponse?>(null) }
             scope.launch { result.value = getUserInfo(applicationContext) }
 
+            val results2 = remember { mutableStateOf<UserReadResponse?>(null) }
+            scope.launch { results2.value = userRead(applicationContext) }
+
+            var imgPath by remember { mutableStateOf("") }
+            results2.value?.let {
+                imgPath = it.imgPath
+            }
+
             result.value?.let {
                 GameHeader(
                     username = it.username,
                     coin = it.coin,
                     bees = it.bees,
-                    level = it.level
+                    level = it.level,
+                    imgPath = imgPath
                 )
             }
             Box(

@@ -27,6 +27,7 @@ import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
 import com.google.relay.compose.RelayText
+import com.google.relay.compose.RelayVector
 
 /**
  * Game Home Screen V1
@@ -40,7 +41,8 @@ fun GameHeader(
     username: String,
     coin: Int,
     bees: Int,
-    level: Int
+    level: Int,
+    imgPath: String
 ) {
     TopLevel(modifier = modifier) {
         GameHeader(
@@ -52,29 +54,27 @@ fun GameHeader(
                 )
             )
         ) {
-            GameHeaderUserinfo {
-                GameHeaderUserinfoTitle(
-                    modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopStart,
-                        offset = DpOffset(
-                            x = 72.0.dp,
-                            y = 13.0.dp
-                        )
-                    ),
-                    username = username
-                )
-                GameHeaderUserinfoLevel(
-                    modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopCenter,
-                        offset = DpOffset(
-                            x = 27.0.dp,
-                            y = 30.0.dp
-                        )
-                    ),
-                    level = level
-                )
-                GameHeaderUserinfoBg()
-            }
+            NewGameHeader(imgPath = imgPath)
+            GameHeaderUserinfoTitle(
+                modifier = Modifier.boxAlign(
+                    alignment = Alignment.TopStart,
+                    offset = DpOffset(
+                        x = 65.0.dp,
+                        y = 11.0.dp
+                    )
+                ),
+                username = username
+            )
+            GameHeaderUserinfoLevel(
+                modifier = Modifier.boxAlign(
+                    alignment = Alignment.TopStart,
+                    offset = DpOffset(
+                        x = 65.0.dp,
+                        y = 28.0.dp
+                    )
+                ),
+                level = level
+            )
             GameHeaderBee(
                 modifier = Modifier.boxAlign(
                     alignment = Alignment.TopStart,
@@ -131,7 +131,8 @@ private fun GamePreview() {
                 username = "김벌벌",
                 coin = 100,
                 bees = 100,
-                level = 1
+                level = 1,
+                imgPath = "defaultImage.png"
             )
         }
     }

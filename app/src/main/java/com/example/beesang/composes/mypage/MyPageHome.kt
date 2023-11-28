@@ -102,7 +102,7 @@ fun MyPageHome(
                         scope.launch { userProfileUpload(applicationContext, body) }
                     }
 
-                    Thread.sleep(1000)
+                    Thread.sleep(1500)
                     refreshActivity()
                 }
             }
@@ -112,10 +112,6 @@ fun MyPageHome(
             scope.launch { results.value = userRead(applicationContext) }
 
             results.value?.let {
-                Log.i("username", it.username)
-                Log.i("schoolName", it.schoolName)
-                Log.i("studentId", it.studentId)
-                Log.i("imgPath", it.imgPath)
                 MyPageProfile(
                     onUpdateBtnTapped = { pickImage.launch("image/*") },
                     imgPath = it.imgPath

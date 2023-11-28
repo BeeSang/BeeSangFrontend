@@ -1,14 +1,12 @@
-package com.example.beesang.composes.mypage
+package com.example.beesang.composes.game
 
 import androidx.compose.foundation.Image
-import com.example.beesang.mypageprofile.notoSansKR
-
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,48 +18,50 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.beesang.R
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
-import com.google.relay.compose.RelayText
-import com.google.relay.compose.tappable
+import com.google.relay.compose.RelayVector
 
+/**
+ * asdf
+ *
+ * This composable was generated from the UI Package 'new_game_header'.
+ * Generated code; do not edit directly
+ */
 @Composable
-fun MyPageProfile(
+fun NewGameHeader(
     modifier: Modifier = Modifier,
-    imgPath: String,
-    onUpdateBtnTapped: () -> Unit = {}
+    imgPath: String
 ) {
-    MyPageProfileTopLevel(modifier = modifier) {
-        MypageProfileProfile(
+    NewGameHeaderTopLevel(modifier = modifier) {
+        NewGameHeaderHeader(
             modifier = Modifier.boxAlign(
-                alignment = Alignment.TopCenter,
+                alignment = Alignment.TopStart,
                 offset = DpOffset(
                     x = 0.0.dp,
                     y = 0.0.dp
                 )
             )
         ) {
-            MypageProfileProfileUpdateButton(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.TopStart,
-                    offset = DpOffset(
-                        x = 10.0.dp,
-                        y = 127.0.dp
-                    )
-                ).tappable(onTap = { onUpdateBtnTapped() })
-            )
-            MypageProfileProfileBg()
-            MypageProfileProfileImage(
+            NewGameHeaderHeaderRight(
                 modifier = Modifier.boxAlign(
                     alignment = Alignment.TopStart,
                     offset = DpOffset(
                         x = 4.0.dp,
-                        y = 4.0.dp
+                        y = 2.0.dp
+                    )
+                )
+            )
+            NewGameHeaderHeaderLeft()
+            NewGameHeaderHeaderImg(
+                modifier = Modifier.boxAlign(
+                    alignment = Alignment.TopStart,
+                    offset = DpOffset(
+                        x = 4.0.dp,
+                        y = 5.0.dp
                     )
                 ),
                 imgPath = imgPath
@@ -70,51 +70,61 @@ fun MyPageProfile(
     }
 }
 
+@Preview(widthDp = 375, heightDp = 812)
 @Composable
-fun MypageProfileProfileUpdateButton(modifier: Modifier = Modifier) {
-    RelayText(
-        content = "사진 또는 아바타 수정",
-        fontSize = 12.0.sp,
-        fontFamily = notoSansKR,
-        color = Color(
-            alpha = 255,
-            red = 175,
-            green = 135,
-            blue = 76
-        ),
-        height = 1.4479999542236328.em,
-        modifier = modifier
-    )
+private fun NewGameHeaderPreview() {
+    MaterialTheme {
+        RelayContainer {
+            NewGameHeader(
+                modifier = Modifier
+                    .rowWeight(1.0f)
+                    .columnWeight(1.0f),
+                "defaultImage.png"
+            )
+        }
+    }
 }
 
 @Composable
-fun MypageProfileProfileBg(modifier: Modifier = Modifier) {
+fun NewGameHeaderHeaderRight(modifier: Modifier = Modifier) {
     RelayImage(
-        image = painterResource(R.drawable.mypage_profile_mypage_profile_profile_bg),
+        image = painterResource(R.drawable.new_game_header_new_game_header_header_right),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(127.0.dp).requiredHeight(127.0.dp)
+        modifier = modifier
+            .requiredWidth(160.0.dp)
+            .requiredHeight(59.6273193359375.dp)
     )
 }
 
 @Composable
-fun MypageProfileProfileImage(modifier: Modifier = Modifier, imgPath: String) {
+fun NewGameHeaderHeaderLeft(modifier: Modifier = Modifier) {
+    RelayImage(
+        image = painterResource(R.drawable.new_game_header_new_game_header_header_left),
+        contentScale = ContentScale.Crop,
+        modifier = modifier
+            .requiredWidth(60.0.dp)
+            .requiredHeight(60.0.dp)
+    )
+}
+
+@Composable
+fun NewGameHeaderHeaderImg(modifier: Modifier = Modifier, imgPath: String) {
     Image(
         painter = rememberImagePainter(
-            data = "https://beesang.s3.ap-northeast-2.amazonaws.com/user/$imgPath",
-            builder = {
-                crossfade(true)
-            }
-        ),
+        data = "https://beesang.s3.ap-northeast-2.amazonaws.com/user/$imgPath",
+        builder = {
+            crossfade(true)
+        }),
         modifier = modifier
-            .size(113.dp)
-            .clip(CircleShape),
+        .size(52.dp)
+        .clip(RoundedCornerShape(6.dp)),
         contentScale = ContentScale.Crop,
         contentDescription = null // Provide content description if needed
     )
 }
 
 @Composable
-fun MypageProfileProfile(
+fun NewGameHeaderHeader(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -122,18 +132,22 @@ fun MypageProfileProfile(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(127.0.dp).requiredHeight(144.0.dp)
+        modifier = modifier
+            .requiredWidth(164.0.dp)
+            .requiredHeight(61.6273193359375.dp)
     )
 }
 
 @Composable
-fun MyPageProfileTopLevel(
+fun NewGameHeaderTopLevel(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
     RelayContainer(
         isStructured = false,
         content = content,
-        modifier = modifier.fillMaxWidth(1.0f).requiredHeight(150.dp)
+        modifier = modifier
+            .fillMaxWidth(1.0f)
+            .requiredHeight(62.dp)
     )
 }

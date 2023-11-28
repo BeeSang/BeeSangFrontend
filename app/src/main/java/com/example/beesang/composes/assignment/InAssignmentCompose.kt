@@ -95,7 +95,7 @@ fun InAssignmentCompose(
             }
 
             Toast.makeText(applicationContext, "축하드려요! 10마리의 벌이 살아났어요!", Toast.LENGTH_SHORT).show()
-            Thread.sleep(1000)
+            Thread.sleep(1500)
             refreshActivity()
         }
     }
