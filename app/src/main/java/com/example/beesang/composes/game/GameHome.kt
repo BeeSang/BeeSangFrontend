@@ -57,7 +57,7 @@ fun GameHome(
         Column(
             modifier = modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 16.dp, start = 0.dp, end = 16.dp)
+                .padding(top = 16.dp)
         ) {
             val scope = CoroutineScope(Dispatchers.IO)
             val result = remember { mutableStateOf<FarmUserInfoResponse?>(null) }

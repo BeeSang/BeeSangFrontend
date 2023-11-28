@@ -208,7 +208,7 @@ fun InGameCompose(
 
             Column(
                 modifier = modifier
-                    .padding(top = 16.dp, start = 0.dp, end = 16.dp)
+                    .padding(top = 16.dp)
             ) {
                 val result = remember { mutableStateOf<FarmUserInfoResponse?>(null) }
                 scope.launch { result.value = getUserInfo(applicationContext) }

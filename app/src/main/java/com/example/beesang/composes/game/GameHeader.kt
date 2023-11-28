@@ -5,6 +5,7 @@ import com.example.beesang.game.notoSansKR
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -45,17 +47,17 @@ fun GameHeader(
             modifier = Modifier.boxAlign(
                 alignment = Alignment.TopCenter,
                 offset = DpOffset(
-                    x = 14.0.dp,
-                    y = 10.0.dp
+                    x = 0.0.dp,
+                    y = 0.0.dp
                 )
             )
         ) {
             GameHeaderUserinfo {
                 GameHeaderUserinfoTitle(
                     modifier = Modifier.boxAlign(
-                        alignment = Alignment.TopCenter,
+                        alignment = Alignment.TopStart,
                         offset = DpOffset(
-                            x = 12.0.dp,
+                            x = 72.0.dp,
                             y = 13.0.dp
                         )
                     ),
@@ -77,7 +79,7 @@ fun GameHeader(
                 modifier = Modifier.boxAlign(
                     alignment = Alignment.TopStart,
                     offset = DpOffset(
-                        x = 261.0.dp,
+                        x = 250.0.dp,
                         y = 17.0.dp
                     )
                 )
@@ -98,7 +100,7 @@ fun GameHeader(
                 modifier = Modifier.boxAlign(
                     alignment = Alignment.TopStart,
                     offset = DpOffset(
-                        x = 174.0.dp,
+                        x = 169.0.dp,
                         y = 9.0.dp
                     )
                 )
@@ -119,15 +121,21 @@ fun GameHeader(
     }
 }
 
-//@Preview(widthDp = 375, heightDp = 812)
-//@Composable
-//private fun GamePreview() {
-//    MaterialTheme {
-//        RelayContainer {
-//            GameHeader(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
-//        }
-//    }
-//}
+@Preview(widthDp = 375, heightDp = 812)
+@Composable
+private fun GamePreview() {
+    MaterialTheme {
+        RelayContainer {
+            GameHeader(
+                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f),
+                username = "김벌벌",
+                coin = 100,
+                bees = 100,
+                level = 1
+            )
+        }
+    }
+}
 
 @Composable
 fun GameHeaderUserinfoTitle(modifier: Modifier = Modifier, username: String) {
@@ -296,7 +304,7 @@ fun GameHeader(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(344.0.dp).requiredHeight(69.0.dp)
+        modifier = modifier.requiredWidth(334.0.dp).requiredHeight(69.0.dp)
     )
 }
 

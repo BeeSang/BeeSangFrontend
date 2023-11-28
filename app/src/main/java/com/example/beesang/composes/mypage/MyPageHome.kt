@@ -3,6 +3,8 @@ package com.example.beesang.composes.mypage
 import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
@@ -40,6 +42,8 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
 import java.util.UUID
@@ -124,4 +128,22 @@ fun MyPageHome(
             }
         }
     }
+}
+
+private fun resizeInputStream(inputStream: InputStream, maxSize: Int): InputStream {
+    val bitmap = BitmapFactory.decodeStream(inputStream)
+    val scale = maxSize.toFloat() / inputStream.available().toFloat()
+
+    if (scale >= 1.0) {
+        return ByteArrayInputStream(inputStream.readBytes())
+    }
+
+    val width = (bitmap.width * scale).toInt()
+    val height = (bitmap.height * scale).toInt()
+    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
+
+    val outputStream = ByteArrayOutputStream()
+    resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
+
+    return ByteArrayInputStream(outputStream.toByteArray())
 }

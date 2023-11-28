@@ -1,26 +1,15 @@
 package com.example.beesang.composes.assignment
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.icu.number.Scale
 import android.net.Uri
-import android.os.Build
-import android.util.Base64
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -68,6 +57,8 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
 import java.util.UUID
