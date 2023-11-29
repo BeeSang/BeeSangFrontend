@@ -40,6 +40,10 @@ class ChapterActivity : ComponentActivity() {
         finish()
     }
     private fun onHomeBtnTapped() {
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
         finish()
     }
 

@@ -51,9 +51,11 @@ class InAssignmentActivity: ComponentActivity() {
         finish()
     }
     private fun onHomeBtnTapped() {
-        Intent(this, HomeActivity::class.java).apply {
-            startActivity(this)
-        }
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+        finish()
     }
     private fun refreshActivity() {
         finish()
