@@ -4,6 +4,7 @@ import GameBottomBar
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -95,8 +96,8 @@ fun GameHome(
                 ) {
                     GameBoard(crops = "방울토마토", bg = R.drawable.game2_game_room_bg, onGameBoardTapped = onGameBoardTapped)
                     GameBoard(crops = "고구마", bg = R.drawable.game2_game_room_bg4, onGameBoardTapped = onGameBoardTapped)
-                    GameBoard(crops = "망고", bg = R.drawable.game2_game_room_bg2/*, onGameBoardTapped = onGameBoardTapped*/)
-                    GameBoard(crops = "상추", bg = R.drawable.game2_game_room_bg3/*, onGameBoardTapped = onGameBoardTapped*/)
+                    GameBoard(crops = "망고", bg = R.drawable.game2_game_room_bg2, onGameBoardTapped = { Toast.makeText(applicationContext, "아직 이용할 수 없어요ㅜㅜ", Toast.LENGTH_SHORT).show() })
+                    GameBoard(crops = "상추", bg = R.drawable.game2_game_room_bg3, onGameBoardTapped = { Toast.makeText(applicationContext, "아직 이용할 수 없어요ㅜㅜ", Toast.LENGTH_SHORT).show() })
                 }
                 GameBottomBar(
                     modifier = Modifier

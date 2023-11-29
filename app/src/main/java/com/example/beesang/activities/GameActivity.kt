@@ -2,6 +2,7 @@ package com.example.beesang.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,9 +39,7 @@ class GameActivity : ComponentActivity() {
     }
 
     private fun onCommunityBtnTapped() {
-//        Intent(this, GameActivity::class.java).apply {
-//            startActivity(this)
-//        }
+        Toast.makeText(applicationContext, "친구가 없어요ㅜㅜ", Toast.LENGTH_SHORT).show()
     }
 
     private fun onHomeBtnTapped() {

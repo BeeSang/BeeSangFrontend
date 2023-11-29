@@ -26,12 +26,6 @@ import com.google.relay.compose.RelayContainerScope
 import com.google.relay.compose.RelayImage
 import com.google.relay.compose.RelayText
 
-/**
- * inassignment_indexbar V1
- *
- * This composable was generated from the UI Package 'inassignment_indexbar'.
- * Generated code; do not edit directly
- */
 @Composable
 fun InAssignmentIndexBar(
     modifier: Modifier = Modifier,
@@ -52,11 +46,11 @@ fun InAssignmentIndexBar(
                 modifier = Modifier.boxAlign(
                     alignment = Alignment.TopCenter,
                     offset = DpOffset(
-                        x = -32.0.dp,
+                        x = -6.753173828125.dp,
                         y = 6.0.dp
                     )
                 ),
-                title = title
+                title
             )
         }
     }
@@ -64,7 +58,7 @@ fun InAssignmentIndexBar(
 
 @Preview(widthDp = 430, heightDp = 932)
 @Composable
-private fun InAssignmentIndexBarPreview() {
+private fun InassignmentIndexbarPreview() {
     MaterialTheme {
         RelayContainer {
             InAssignmentIndexBar(
@@ -80,7 +74,7 @@ fun InassignmentIndexbarIndexbarBg(modifier: Modifier = Modifier) {
     RelayImage(
         image = painterResource(R.drawable.inassignment_indexbar_inassignment_indexbar_indexbar_bg),
         contentScale = ContentScale.Crop,
-        modifier = modifier.requiredWidth(359.0.dp).requiredHeight(39.0.dp)
+        modifier = modifier.requiredWidth(320.0.dp).requiredHeight(39.0.dp)
     )
 }
 
@@ -100,7 +94,7 @@ fun InassignmentIndexbarIndexbarTitle(modifier: Modifier = Modifier, title: Stri
         textAlign = TextAlign.Left,
         fontWeight = FontWeight(700.0.toInt()),
         maxLines = -1,
-        modifier = modifier.requiredWidth(285.0.dp).requiredHeight(28.0.dp)
+        modifier = modifier.requiredWidth(296.10400390625.dp).requiredHeight(28.0.dp)
     )
 }
 
@@ -113,7 +107,7 @@ fun InassignmentIndexbarIndexbar(
         isStructured = false,
         clipToParent = false,
         content = content,
-        modifier = modifier.requiredWidth(359.0.dp).requiredHeight(39.0.dp)
+        modifier = modifier.requiredWidth(320.0.dp).requiredHeight(39.0.dp)
     )
 }
 
@@ -125,8 +119,6 @@ fun InAssignmentIndexBarTopLevel(
     RelayContainer(
         isStructured = false,
         content = content,
-        modifier = modifier
-            .fillMaxWidth(1.0f)
-            .requiredHeight(40.dp)
+        modifier = modifier.fillMaxWidth(1.0f).requiredHeight(40.dp)
     )
 }
